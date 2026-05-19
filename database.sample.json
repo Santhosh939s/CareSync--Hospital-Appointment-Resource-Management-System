@@ -1,0 +1,72 @@
+{
+  "_readme": "Copy this file to database.json to initialize the system. Run: cp database.sample.json database.json",
+  "users": [
+    {
+      "id": "u1",
+      "name": "Admin Master",
+      "email": "admin@hospital.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "d1",
+      "name": "Dr. Ananya Sharma",
+      "email": "ananya@hospital.com",
+      "password": "doctor123",
+      "role": "doctor",
+      "specialty": "Cardiology"
+    },
+    {
+      "id": "d2",
+      "name": "Dr. Vikram Singh",
+      "email": "vikram@hospital.com",
+      "password": "doctor123",
+      "role": "doctor",
+      "specialty": "Neurology"
+    },
+    {
+      "id": "d3",
+      "name": "Dr. Priya Patel",
+      "email": "priya@hospital.com",
+      "password": "doctor123",
+      "role": "doctor",
+      "specialty": "General Practice"
+    },
+    {
+      "id": "p1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "patient123",
+      "role": "patient"
+    }
+  ],
+  "appointments": [],
+  "resources": {
+    "beds": {
+      "total": 50,
+      "available": 50
+    },
+    "bloodBank": {
+      "A+": 25,
+      "O+": 20,
+      "B+": 18,
+      "O-": 15,
+      "AB+": 12
+    },
+    "equipment": {
+      "MRI Machine": {
+        "total": 3,
+        "available": 3
+      },
+      "X-Ray": {
+        "total": 5,
+        "available": 5
+      },
+      "Ventilators": {
+        "total": 20,
+        "available": 20
+      }
+    }
+  },
+  "allocations": []
+}

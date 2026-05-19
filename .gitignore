@@ -4,3 +4,6 @@ package-lock.json
 *.log
 .DS_Store
 Thumbs.db
+
+# Local database — contains live data and credentials, never push this
+database.json
