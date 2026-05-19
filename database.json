@@ -201,16 +201,42 @@
       "status": "Completed",
       "problem": "dkqwn",
       "prescription": "lkqn"
+    },
+    {
+      "id": "apt1776258127583",
+      "patientId": "p1775059025879",
+      "doctorId": "d2",
+      "date": "2026-04-16",
+      "slot": "10:00 AM",
+      "status": "Approved"
+    },
+    {
+      "id": "apt1776322657110",
+      "patientId": "p1775059025879",
+      "doctorId": "d2",
+      "date": "2026-04-16",
+      "slot": "02:00 PM",
+      "status": "Completed",
+      "problem": "mhkj,",
+      "prescription": "kjjk",
+      "assignedResources": {
+        "bed": true,
+        "blood": {
+          "type": "O+",
+          "units": 1
+        },
+        "equipment": "MRI Machine"
+      }
     }
   ],
   "resources": {
     "beds": {
       "total": 50,
-      "available": 49
+      "available": 48
     },
     "bloodBank": {
       "A+": 9,
-      "O+": 5,
+      "O+": 4,
       "B+": 15,
       "O-": 13,
       "AB+": 11
@@ -289,6 +315,22 @@
       "date": "2026-04-02",
       "slot": "03:00 PM",
       "status": "Scheduled"
+    },
+    {
+      "id": "alc1776322707586b",
+      "type": "Bed",
+      "patientId": "p1775059025879",
+      "amount": 1,
+      "date": "2026-04-16",
+      "status": "Active"
+    },
+    {
+      "id": "alc1776322707587bl",
+      "type": "Blood (O+)",
+      "patientId": "p1775059025879",
+      "amount": 1,
+      "date": "2026-04-16",
+      "status": "Fulfilled"
     }
   ]
 }

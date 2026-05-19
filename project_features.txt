@@ -1,0 +1,62 @@
+Hospital Appointment and Resource Management System
+Comprehensive Feature List & Architectural Overview
+
+==================================================
+1. USER AUTHENTICATION & AUTHORIZATION
+==================================================
+- Role-Based Access Control: The system distinguishes between 3 explicit roles: Admin, Doctor, and Patient.
+- Dynamic Dashboards: Upon successful login, users are routed automatically to a specialized workspace corresponding directly to their clearance (Admin Dashboard, Doctor Dashboard, Patient Dashboard).
+- Local Session Management: Auth state is gracefully retained in the browser's LocalStorage, maintaining persistent login states during page refreshes and browser re-starts.
+- Registration Module: Allows new patients to organically sign-up and auto-authenticates them into the network immediately.
+
+==================================================
+2. PATIENT FEATURES
+==================================================
+- Doctor Discovery: Patients can filter available doctors based on medical departments/specialties (e.g., Cardiology, Neurology).
+- Real-Time Scheduling Engine: Patients select dates and time slots. The system features conflict resolution, warning if slots are booked or preventing scheduling in past times.
+- Appointment Management: Patients can view a timeline of all active or historical appointments, clearly indicating status badges (Pending, Approved, Cancelled, Completed).
+- Early Withdrawal: Patients can cancel or withdraw uncompleted appointments ahead of time.
+- Digital Prescription Viewer: After consultation, patients can retrieve electronic prescriptions. The system notifies patients if a doctor edits their previous medical record.
+- Scan Booking Integration: If a doctor mandates a diagnostic scan (like MRI or X-Ray), the patient's dashboard unblocks an interface allowing them to secure a time for that specific machine.
+
+==================================================
+3. DOCTOR FEATURES
+==================================================
+- Daily Roster Management: Custom schedule views allowing sorting by dates to track daily patient traffic.
+- Consultation Interface: Secure digital forms to insert the patient's diagnosis and medical prescriptions.
+- Workflow Controls: Doctors possess active authority to Approve, Decline or Cancel incoming appointment requests.
+- Integrated Hospital Resource Allocation: Directly from the consultation UI, doctors can deduct units from the hospital's central inventory:
+   * Hospital Beds (reserving a physical bed for admission)
+   * Blood Bank Units (deducting A+, B+, etc. based on trauma needs)
+   * Equipment Scans (Flagging a requirement for patients to book a scan session)
+- Record Editing: The ability to retroactively edit historical prescriptions. 
+
+==================================================
+4. ADMINISTRATOR FEATURES
+==================================================
+- Global Oversight Hub: An administrative view granting visibility into every appointment placed across the entire facility.
+- Executive Overrides: Force-cancellations of appointments if scheduling crises occur.
+- Doctor Tracking: A specialized roster checking which specialists are actively operating.
+- Live Resource Monitoring: Uses progression logic to visually illustrate (via progress bars & dynamic colors) the current supply vs capacity limitations for Beds, Blood Bank types, and physical Diagnostic Machines.
+
+==================================================
+5. DATA STORAGE ARCHITECTURE
+==================================================
+- Backend Engine: Empowered by a Node.js/Express.js REST API Server.
+- Datastore: Persisted completely locally using a NoSQL JSON file (`database.json`). It stores objects and arrays systematically, simulating document-storage collections.
+- Categories of Data: Data is partitioned into 'users', 'appointments', 'resources', and 'allocations'.
+
+==================================================
+6. ACADEMIC CLARIFICATION (SE & PM - RELATIONAL KEYS)
+==================================================
+Regarding the inquiry about the usage of Primary Keys and Foreign Keys:
+
+Because this implementation utilizes a lightweight NoSQL JSON document approach rather than a traditional Relational Database Management System (like MySQL or Oracle), the literal SQL database properties of "Primary Keys" and "Foreign Keys" constraint keywords are not used. 
+
+However, the CONCEPT of Relational Mapping is heavily programmed into the system logic:
+
+a) Functional "Primary Keys"
+Every entity registered into the system is given a mathematically unique identifier that guarantees it will never clash with another object. The software achieves this by appending prefixes to millisecond timestamps (e.g., `id: "p1775059025879"` for Patients, `id: "apt1775058921944"` for Appointments). This functions identically to an Auto-Incrementing Primary Key, ensuring each JSON object is distinct and identifiable globally.
+
+b) Functional "Foreign Keys"
+The system successfully bridges related documents using these generated IDs. For instance, in the 'appointments' data block, the system does not nest the entire patient profile. Instead, it stores `patientId: "p1775059025879"` and `doctorId: "d1"`. These ID variables function exactly like Foreign Keys. When the frontend requests a patient's schedule, the logic queries the database searching for appointments that hold a `patientId` matching the logged-in user, thereby establishing a relational join programmatically without strict SQL tables.
