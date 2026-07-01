@@ -134,6 +134,32 @@ function handleLogin(e) {
     }
 }
 
+async function loginAsGuest(role) {
+    showToast(`Initializing Guest ${role} Environment...`, 'success');
+    try {
+        const res = await fetch(`${API_URL}/guest-login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ role })
+        });
+        
+        const data = await res.json();
+        
+        if(data.success) {
+            currentUser = data.user;
+            db.setCurrentUser(data.user);
+            await fetchDatabase(); // Force a sync
+            showToast(`Logged in as Guest ${role.charAt(0).toUpperCase() + role.slice(1)}!`);
+            route();
+        } else {
+            showToast('Guest login failed: ' + data.error, 'error');
+        }
+    } catch(err) {
+        showToast('Connection error', 'error');
+        console.error(err);
+    }
+}
+
 async function handleRegister(e) {
     e.preventDefault();
     const name = document.getElementById('reg-name').value;

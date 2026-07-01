@@ -65,6 +65,47 @@ app.post('/api/users', async (req, res) => {
     }
 });
 
+// POST for guest/recruiter login
+app.post('/api/guest-login', async (req, res) => {
+    const { role } = req.body; // 'patient', 'doctor', or 'admin'
+    if (!['patient', 'doctor', 'admin'].includes(role)) {
+        return res.status(400).json({ success: false, error: 'Invalid role' });
+    }
+
+    const email = `guest_${role}@caresync.com`;
+    
+    try {
+        let user = await User.findOne({ email });
+        
+        if (!user) {
+            // Generate a guest account if it doesn't exist
+            const id = 'U' + Date.now() + Math.floor(Math.random() * 100);
+            const name = role.charAt(0).toUpperCase() + role.slice(1) + ' Guest';
+            
+            const userData = {
+                id,
+                role,
+                name,
+                email,
+                password: 'guestpassword123'
+            };
+            
+            if (role === 'doctor') {
+                userData.specialty = 'General Practice';
+                userData.department = 'Outpatient';
+                userData.maxPatients = 20;
+            }
+            
+            user = new User(userData);
+            await user.save();
+        }
+        
+        res.json({ success: true, user });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 // POST to save a new appointment
 app.post('/api/appointments', async (req, res) => {
     try {
