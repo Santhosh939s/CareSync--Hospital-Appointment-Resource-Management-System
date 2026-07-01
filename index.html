@@ -94,6 +94,22 @@
                                 Launch Fiori Dashboard
                             </button>
                         </div>
+
+                        <!-- Recruiter / Guest Access Section -->
+                        <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6 max-w-lg">
+                            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Recruiter / Guest Access</p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="loginAsGuest('patient')" class="bg-white dark:bg-gray-800 border-2 border-teal-500 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 text-sm shadow-sm">
+                                    <i class="fa-solid fa-user-injured"></i> Guest Patient
+                                </button>
+                                <button onclick="loginAsGuest('doctor')" class="bg-white dark:bg-gray-800 border-2 border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 text-sm shadow-sm">
+                                    <i class="fa-solid fa-user-doctor"></i> Guest Doctor
+                                </button>
+                                <button onclick="loginAsGuest('admin')" class="bg-white dark:bg-gray-800 border-2 border-purple-500 text-purple-700 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 text-sm shadow-sm">
+                                    <i class="fa-solid fa-user-tie"></i> Guest Admin
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="relative hidden lg:block">
                         <!-- Abstract decorative shapes -->
@@ -175,24 +191,7 @@
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all">Create Profile</button>
                 </form>
 
-                <!-- Recruiter / Guest Access Section -->
-                <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <div class="text-center mb-4">
-                        <h3 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider">Recruiter / Guest Access</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Instantly experience the platform.</p>
-                    </div>
-                    <div class="grid grid-cols-1 gap-3">
-                        <button onclick="loginAsGuest('patient')" class="w-full bg-white dark:bg-gray-800 border-2 border-teal-500 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-user-injured"></i> Guest Patient
-                        </button>
-                        <button onclick="loginAsGuest('doctor')" class="w-full bg-white dark:bg-gray-800 border-2 border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-user-doctor"></i> Guest Doctor
-                        </button>
-                        <button onclick="loginAsGuest('admin')" class="w-full bg-white dark:bg-gray-800 border-2 border-purple-500 text-purple-700 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-user-tie"></i> Guest Admin
-                        </button>
-                    </div>
-                </div>
+
 
             </div>
             </div>
