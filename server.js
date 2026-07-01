@@ -1,154 +1,196 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const { User, Appointment, Allocation, FinancialLedger, PurchaseOrder, Resource } = require('./models');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname)); // Serve frontend files
 
-const dbPath = path.join(__dirname, 'database.json');
-
-// Safely read the database file
-const readDB = () => {
-    try {
-        if (!fs.existsSync(dbPath)) {
-            // Default fallback structure
-             return { users: [], appointments: [], resources: {} };
-        }
-        const data = fs.readFileSync(dbPath, 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        console.error("DB Read Error", err);
-        return { users: [], appointments: [], resources: {} };
-    }
-};
-
-// Safely write the database file
-const writeDB = (data) => {
-    try {
-        fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf8');
-    } catch (err) {
-        console.error("DB Write Error", err);
-    }
-};
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGODB_URI)
+  .then(async () => {
+      console.log('Connected to MongoDB Atlas');
+      
+      // Initialize default resources if not exists
+      const count = await Resource.countDocuments();
+      if (count === 0) {
+          await new Resource().save();
+          console.log('Initialized default hospital resources in MongoDB.');
+      }
+  })
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // --- API ENDPOINTS ---
 
-// GET entirely database (for easiest client refactor)
-app.get('/api/data', (req, res) => {
-    const db = readDB();
-    if(!db.allocations) { db.allocations = []; writeDB(db); }
-    res.json({
-        hms_users: db.users,
-        hms_appointments: db.appointments,
-        hms_resources: db.resources,
-        hms_allocations: db.allocations
-    });
+// GET entirely database (OData Style Response)
+app.get('/api/data', async (req, res) => {
+    try {
+        const users = await User.find().lean();
+        const appointments = await Appointment.find().lean();
+        const resources = await Resource.findOne().lean() || {};
+        const allocations = await Allocation.find().lean();
+        const financial_ledgers = await FinancialLedger.find().lean();
+        const purchase_orders = await PurchaseOrder.find().lean();
+        
+        res.json({
+            d: {
+                results: {
+                    hms_users: users,
+                    hms_appointments: appointments,
+                    hms_resources: resources,
+                    hms_allocations: allocations,
+                    hms_financials: financial_ledgers,
+                    hms_purchasing: purchase_orders
+                }
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
-// POST to register a new patient
-app.post('/api/users', (req, res) => {
-    const db = readDB();
-    const newUser = req.body;
-    db.users.push(newUser);
-    writeDB(db);
-    res.json({ success: true, user: newUser });
+// POST to register a new user
+app.post('/api/users', async (req, res) => {
+    try {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.json({ success: true, user: newUser });
+    } catch (err) {
+        res.status(400).json({ success: false, error: err.message });
+    }
 });
 
 // POST to save a new appointment
-app.post('/api/appointments', (req, res) => {
-    const db = readDB();
-    const newAppointment = req.body;
-    db.appointments.push(newAppointment);
-    writeDB(db);
-    res.json({ success: true, appointment: newAppointment });
+app.post('/api/appointments', async (req, res) => {
+    try {
+        const newAppointment = new Appointment(req.body);
+        await newAppointment.save();
+        res.json({ success: true, appointment: newAppointment });
+    } catch (err) {
+        res.status(400).json({ success: false, error: err.message });
+    }
 });
 
 // PUT to update an appointment completely or partially
-app.put('/api/appointments/:id', (req, res) => {
-    const db = readDB();
-    if(!db.allocations) db.allocations = [];
-    
+app.put('/api/appointments/:id', async (req, res) => {
     const { id } = req.params;
     const { status, problem, prescription, resources, isUpdated, updatedAt } = req.body;
     
-    const index = db.appointments.findIndex(a => a.id === id);
-    if(index !== -1 && status) {
-        db.appointments[index].status = status;
-        if(problem !== undefined) db.appointments[index].problem = problem;
-        if(prescription !== undefined) db.appointments[index].prescription = prescription;
-        if(isUpdated) {
-            db.appointments[index].isUpdated = true;
-            db.appointments[index].updatedAt = updatedAt;
+    try {
+        const appointment = await Appointment.findOne({ id });
+        if (!appointment) return res.status(404).json({ success: false, error: 'Appointment not found' });
+        
+        if (status) appointment.status = status;
+        if (problem !== undefined) appointment.set('problem', problem);
+        if (prescription !== undefined) appointment.set('prescription', prescription);
+        
+        if (isUpdated) {
+            appointment.set('isUpdated', true);
+            appointment.set('updatedAt', updatedAt);
         }
+        
+        const resourceDoc = await Resource.findOne();
+        const patientId = appointment.patientId;
+        const today = new Date().toISOString().split('T')[0];
         
         // If doctor prescribed resources, deduct & allocate
-        if(resources && !isUpdated) {
-            db.appointments[index].assignedResources = resources;
-            const patientId = db.appointments[index].patientId;
-            const today = new Date().toISOString().split('T')[0];
+        if (resources && !isUpdated) {
+            appointment.set('assignedResources', resources);
             
-            if(resources.bed) {
-                if(db.resources.beds.available > 0) {
-                    db.resources.beds.available -= 1;
-                    db.allocations.push({ id: 'alc'+Date.now()+'b', type: 'Bed', patientId, amount: 1, date: today, status: 'Active' });
-                }
+            if (resources.bed && resourceDoc.beds.available > 0) {
+                resourceDoc.beds.available -= 1;
+                await new Allocation({ id: 'alc'+Date.now()+'b', type: 'Bed', patientId, amount: 1, date: today, status: 'Active' }).save();
+                await new FinancialLedger({ docId: 'FI'+Date.now()+'b', patientId, type: 'Bed Allocation Charge', amount: 500, date: today, status: 'Posted' }).save();
             }
-            if(resources.blood && resources.blood.type && resources.blood.units > 0) {
+            
+            if (resources.blood && resources.blood.type && resources.blood.units > 0) {
                 const bType = resources.blood.type;
-                if(db.resources.bloodBank[bType] >= resources.blood.units) {
-                    db.resources.bloodBank[bType] -= resources.blood.units;
-                    db.allocations.push({ id: 'alc'+Date.now()+'bl', type: `Blood (${bType})`, patientId, amount: resources.blood.units, date: today, status: 'Fulfilled' });
+                if (resourceDoc.bloodBank[bType] >= resources.blood.units) {
+                    resourceDoc.bloodBank[bType] -= resources.blood.units;
+                    await new Allocation({ id: 'alc'+Date.now()+'bl', type: `Blood (${bType})`, patientId, amount: resources.blood.units, date: today, status: 'Fulfilled' }).save();
+                    await new FinancialLedger({ docId: 'FI'+Date.now()+'bl', patientId, type: `Blood Transfusion (${bType})`, amount: resources.blood.units * 150, date: today, status: 'Posted' }).save();
+                    
+                    if (resourceDoc.bloodBank[bType] <= 10) {
+                        await new PurchaseOrder({ prId: 'PR'+Date.now(), material: `Blood ${bType}`, quantityReq: 20, status: 'Created', date: today }).save();
+                    }
                 }
             }
-            // Equipment is just written onto the prescription; patient books slot themselves below
+            await resourceDoc.save();
         }
         
-        writeDB(db);
-        res.json({ success: true, appointment: db.appointments[index] });
-    } else {
-        res.status(404).json({ success: false, error: 'Appointment not found or missing fields' });
+        // FI/CO: Generate generic consultation charge upon completion
+        if (status === 'Completed' && !isUpdated) {
+            await new FinancialLedger({ docId: 'FI'+Date.now()+'c', patientId, type: 'Consultation Fee', amount: 200, date: today, status: 'Posted' }).save();
+        }
+        
+        await appointment.save();
+        res.json({ success: true, appointment });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
     }
 });
 
 // POST to book an equipment scan (MRI, etc)
-app.post('/api/scans', (req, res) => {
-    const db = readDB();
-    if(!db.allocations) db.allocations = [];
-    
+app.post('/api/scans', async (req, res) => {
     const { patientId, equipment, date, slot } = req.body;
-    const eqData = db.resources.equipment[equipment];
-    
-    if(!eqData) return res.status(400).json({ error: "Unknown equipment" });
-    
-    // capacity check
-    const bookedCount = db.allocations.filter(a => a.type === `Scan: ${equipment}` && a.date === date && a.slot === slot).length;
-    if(bookedCount >= eqData.total) { 
-        return res.status(400).json({ error: "No machines available at this time slot" });
+    try {
+        const resourceDoc = await Resource.findOne();
+        if (!resourceDoc) return res.status(500).json({ error: "Resource document missing" });
+        
+        const eqData = resourceDoc.equipment[equipment];
+        if (!eqData) return res.status(400).json({ error: "Unknown equipment" });
+        
+        // capacity check
+        const bookedCount = await Allocation.countDocuments({ type: `Scan: ${equipment}`, date, slot });
+        if (bookedCount >= eqData.total) { 
+            return res.status(400).json({ error: "No machines available at this time slot" });
+        }
+        
+        if (resourceDoc.equipment[equipment].available > 0) {
+            resourceDoc.equipment[equipment].available -= 1;
+        }
+        
+        const newScan = new Allocation({ id: 'scn'+Date.now(), type: `Scan: ${equipment}`, patientId, amount: 1, date, slot, status: 'Scheduled' });
+        await newScan.save();
+        
+        await new FinancialLedger({ docId: 'FI'+Date.now()+'eq', patientId, type: `Equipment Scan (${equipment})`, amount: 1200, date, status: 'Posted' }).save();
+        
+        if (resourceDoc.equipment[equipment].available <= 1) {
+             await new PurchaseOrder({ prId: 'PR'+Date.now()+'eq', material: `Maintenance / Lease for ${equipment}`, quantityReq: 1, status: 'Created', date }).save();
+        }
+        
+        await resourceDoc.save();
+        res.json({ success: true, scan: newScan });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-    
-    // Decrement the global available sum for the Admin Dashboard progress bars
-    if (db.resources.equipment[equipment] && db.resources.equipment[equipment].available > 0) {
-        db.resources.equipment[equipment].available -= 1;
-    }
-    
-    const newScan = { id: 'scn'+Date.now(), type: `Scan: ${equipment}`, patientId, amount: 1, date, slot, status: 'Scheduled' };
-    db.allocations.push(newScan);
-    writeDB(db);
-    res.json({ success: true, scan: newScan });
 });
 
 // PUT to overwrite entire hospital equipment totals (Admin only)
-app.put('/api/resources', (req, res) => {
-    const db = readDB();
+app.put('/api/resources', async (req, res) => {
     const newResources = req.body.resources;
     if(!newResources) return res.status(400).json({ error: "No resources provided" });
     
-    db.resources = newResources;
-    writeDB(db);
-    res.json({ success: true, resources: db.resources });
+    try {
+        const resourceDoc = await Resource.findOne();
+        if (resourceDoc) {
+            resourceDoc.beds = newResources.beds;
+            resourceDoc.bloodBank = newResources.bloodBank;
+            resourceDoc.equipment = newResources.equipment;
+            await resourceDoc.save();
+            res.json({ success: true, resources: resourceDoc });
+        } else {
+            res.status(404).json({ error: "Resource document not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on port ${PORT}`));

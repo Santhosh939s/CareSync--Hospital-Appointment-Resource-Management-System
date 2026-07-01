@@ -7,6 +7,20 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sapBlue: '#0070f2',
+                        sapDark: '#1c2228',
+                        sapDarker: '#13171c'
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,13 +31,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col relative md:overflow-x-hidden">
+<body class="bg-gray-50 text-gray-800 dark:bg-sapDarker dark:text-gray-200 antialiased min-h-screen flex flex-col relative md:overflow-x-hidden transition-colors duration-300">
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3"></div>
 
     <!-- Main Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100 backdrop-filter backdrop-blur-lg bg-opacity-90">
+    <nav class="bg-white dark:bg-sapDark shadow-sm sticky top-0 z-40 border-b border-gray-100 dark:border-gray-800 backdrop-filter backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <!-- Logo -->
@@ -31,23 +45,26 @@
                     <div class="bg-teal-600 rounded-lg p-2 mr-3 flex items-center justify-center transform transition hover:rotate-12">
                         <i class="fa-solid fa-staff-snake text-white text-xl"></i>
                     </div>
-                    <span class="font-bold text-2xl tracking-tight text-gray-900">Care<span class="text-teal-600">Sync</span></span>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900 dark:text-white">Care<span class="text-teal-600">Sync</span> <span class="text-xs font-normal text-gray-500 ml-1">Powered by SAP S/4HANA</span></span>
                 </div>
                 
                 <!-- Nav Links -->
                 <div class="flex items-center space-x-4">
+                    <button onclick="toggleDarkMode()" class="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-white transition-colors mr-2">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
                     <!-- Unauthenticated -->
                     <div id="nav-unauth" class="flex items-center space-x-6">
-                        <button onclick="navigateTo('login')" class="text-gray-500 hover:text-teal-700 font-semibold transition-colors text-sm">Login / Sign In</button>
+                        <button onclick="navigateTo('login')" class="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-white font-semibold transition-colors text-sm">Login / Sign In</button>
                     </div>
                     
                     <!-- Authenticated -->
                     <div id="nav-auth" class="hidden items-center space-x-4">
-                        <div class="bg-teal-50 px-3 py-1.5 rounded-full border border-teal-100 flex items-center">
+                        <div class="bg-teal-50 dark:bg-gray-800 px-3 py-1.5 rounded-full border border-teal-100 dark:border-gray-700 flex items-center">
                             <i class="fa-solid fa-user-circle text-teal-600 mr-2 text-lg"></i>
-                            <span id="nav-user-name" class="text-sm font-semibold text-teal-900 mr-2">Welcome</span>
+                            <span id="nav-user-name" class="text-sm font-semibold text-teal-900 dark:text-gray-200 mr-2">Welcome</span>
                         </div>
-                        <button onclick="logout()" class="text-gray-500 hover:text-red-500 bg-white border border-gray-200 hover:border-red-200 rounded-lg px-3 py-1.5 font-medium transition-all flex items-center gap-2 text-sm shadow-sm">
+                        <button onclick="logout()" class="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 bg-white dark:bg-sapDark border border-gray-200 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-500 rounded-lg px-3 py-1.5 font-medium transition-all flex items-center gap-2 text-sm shadow-sm">
                             <i class="fa-solid fa-right-from-bracket"></i> Logout
                         </button>
                     </div>
@@ -60,44 +77,44 @@
     <main class="flex-grow flex flex-col w-full relative z-10">
 
         <!-- 1. LANDING PAGE -->
-        <section id="view-landing" class="page-view active flex-grow bg-white">
+        <section id="view-landing" class="page-view active flex-grow bg-white dark:bg-sapDarker">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <span class="uppercase tracking-widest text-sm font-bold text-teal-600 mb-2 block">Premium Healthcare</span>
-                        <h1 class="text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 mt-2">
-                            Advanced Care, <br/>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-500">Close to Home.</span>
+                        <span class="uppercase tracking-widest text-sm font-bold text-teal-600 mb-2 block">Intelligent ERP Core</span>
+                        <h1 class="text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6 mt-2">
+                            Healthcare Management, <br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sapBlue to-blue-400">Powered by SAP S/4HANA.</span>
                         </h1>
-                        <p class="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
-                            Experience enterprise-grade healthcare management. Book appointments, manage schedules, and track resources seamlessly.
+                        <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
+                            Experience standard enterprise-grade integration. Seamlessly connect Human Capital Management (HCM), Finance & Controlling (FI/CO), and Materials Management (MM) in one digital core.
                         </p>
                         <div class="flex gap-4">
-                            <button onclick="navigateTo('login')" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-teal-500/30 transition-all transform hover:-translate-y-1">
-                                Book an Appointment
+                            <button onclick="navigateTo('login')" class="bg-teal-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                                Launch Fiori Dashboard
                             </button>
                         </div>
                     </div>
                     <div class="relative hidden lg:block">
                         <!-- Abstract decorative shapes -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-teal-100 to-blue-50 rounded-[40px] transform rotate-3 scale-105 -z-10"></div>
-                        <div class="glass-panel p-8 rounded-3xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-[40px] transform rotate-3 scale-105 -z-10 transition-colors duration-300"></div>
+                        <div class="glass-panel dark:bg-sapDark p-8 rounded-3xl relative overflow-hidden border dark:border-gray-700">
                             <div class="absolute top-0 right-0 p-4 opacity-10">
-                                <i class="fa-solid fa-heart-pulse text-9xl text-teal-600"></i>
+                                <i class="fa-solid fa-server text-9xl text-teal-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-4 z-10 relative">System Highlights</h3>
+                            <h3 class="text-xl font-bold mb-4 z-10 relative dark:text-white">SAP S/4HANA Capabilities</h3>
                             <ul class="space-y-4 relative z-10">
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-teal-100 p-2 rounded text-teal-600 mt-0.5"><i class="fa-solid fa-clock"></i></div>
-                                    <div><p class="font-bold">Strict Scheduling</p><p class="text-sm text-gray-500">Automated 1-hour slots honoring working hours & capacity logic.</p></div>
+                                    <div class="bg-blue-100 dark:bg-gray-800 p-2 rounded text-teal-600 mt-0.5"><i class="fa-solid fa-coins"></i></div>
+                                    <div><p class="font-bold dark:text-gray-200">FI/CO Integration</p><p class="text-sm text-gray-500 dark:text-gray-400">Automated billing ledgers for patient consultations and scans.</p></div>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-blue-100 p-2 rounded text-blue-600 mt-0.5"><i class="fa-solid fa-shield-halved"></i></div>
-                                    <div><p class="font-bold">Role-Based Access</p><p class="text-sm text-gray-500">Distinct, secure dashboards for Patients, Doctors, and Admins.</p></div>
+                                    <div class="bg-indigo-100 dark:bg-gray-800 p-2 rounded text-indigo-600 dark:text-indigo-400 mt-0.5"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                    <div><p class="font-bold dark:text-gray-200">Materials Management (MM)</p><p class="text-sm text-gray-500 dark:text-gray-400">Live inventory tracking with auto-generated Purchase Requisitions.</p></div>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-purple-100 p-2 rounded text-purple-600 mt-0.5"><i class="fa-solid fa-bed-pulse"></i></div>
-                                    <div><p class="font-bold">Live Resource Tracking</p><p class="text-sm text-gray-500">Real-time stats on beds, blood banks, and critical equipment.</p></div>
+                                    <div class="bg-purple-100 dark:bg-gray-800 p-2 rounded text-purple-600 dark:text-purple-400 mt-0.5"><i class="fa-solid fa-users"></i></div>
+                                    <div><p class="font-bold dark:text-gray-200">HCM Rostering</p><p class="text-sm text-gray-500 dark:text-gray-400">Organizational management for medical staff capacity planning.</p></div>
                                 </li>
                             </ul>
                         </div>
@@ -277,44 +294,44 @@
         </section>
 
         <!-- 5. ADMIN DASHBOARD -->
-        <section id="view-admin-dashboard" class="page-view flex-grow bg-gray-50 py-8">
+        <section id="view-admin-dashboard" class="page-view flex-grow bg-gray-50 dark:bg-sapDarker py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
-                        <div class="bg-purple-100 p-3 rounded-xl text-purple-600"><i class="fa-solid fa-server text-xl"></i></div>
-                        <h2 class="text-2xl font-bold text-gray-900">Hospital Administration</h2>
+                        <div class="bg-purple-100 dark:bg-gray-800 p-3 rounded-xl text-purple-600 dark:text-purple-400"><i class="fa-solid fa-server text-xl"></i></div>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Fiori Launchpad (Admin)</h2>
                     </div>
-                    <button onclick="openResourceEditor()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i>Manage Inventory</button>
+                    <button onclick="openResourceEditor()" class="bg-teal-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i>Manage Inventory (MM)</button>
                 </div>
 
                 <!-- Resource Widgets -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <!-- Beds -->
-                    <div class="glass-panel p-6 rounded-2xl shadow-sm">
-                        <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 border-b pb-2">Hospital Beds</h3>
+                    <div class="glass-panel dark:bg-sapDark dark:border-gray-700 p-6 rounded-2xl shadow-sm">
+                        <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4 border-b dark:border-gray-700 pb-2">MM - Hospital Beds</h3>
                         <div id="res-beds"></div>
                     </div>
                     
                     <!-- Blood Bank -->
-                    <div class="glass-panel p-6 rounded-2xl shadow-sm">
-                        <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 border-b pb-2">Blood Bank Inventory</h3>
+                    <div class="glass-panel dark:bg-sapDark dark:border-gray-700 p-6 rounded-2xl shadow-sm">
+                        <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4 border-b dark:border-gray-700 pb-2">MM - Blood Bank Inventory</h3>
                         <div id="res-blood"></div>
                     </div>
                     
                     <!-- Equipment -->
-                    <div class="glass-panel p-6 rounded-2xl shadow-sm">
-                        <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 border-b pb-2">Critical Equipment</h3>
+                    <div class="glass-panel dark:bg-sapDark dark:border-gray-700 p-6 rounded-2xl shadow-sm">
+                        <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4 border-b dark:border-gray-700 pb-2">MM - Critical Equipment</h3>
                         <div id="res-equipment"></div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     <!-- Global Appointments -->
-                    <div class="lg:col-span-3 glass-panel rounded-2xl shadow-sm overflow-hidden flex flex-col bg-white">
-                        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                            <h3 class="text-lg font-bold">Global Appointments</h3>
-                            <select id="admin-filter-doctor" onchange="loadAdminGlobalAppointments()" class="border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 text-sm p-2 border">
+                    <div class="lg:col-span-3 glass-panel dark:bg-sapDark dark:border-gray-700 rounded-2xl shadow-sm overflow-hidden flex flex-col bg-white">
+                        <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
+                            <h3 class="text-lg font-bold dark:text-white">Global Appointments (FI/CO Ledgers)</h3>
+                            <select id="admin-filter-doctor" onchange="loadAdminGlobalAppointments()" class="border-gray-300 dark:border-gray-600 dark:bg-sapDark dark:text-white rounded-lg shadow-sm focus:ring-teal-500 text-sm p-2 border">
                                 <option value="">All Doctors...</option>
                             </select>
                         </div>

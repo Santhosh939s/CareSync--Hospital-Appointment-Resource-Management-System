@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 let DB_CACHE = { hms_users: [], hms_appointments: [], hms_resources: {} };
 
 const TIME_SLOTS = ['10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM', '04:00 PM'];
@@ -20,11 +20,14 @@ async function fetchDatabase() {
     try {
         const res = await fetch(`${API_URL}/data`);
         if(res.ok) {
-            const data = await res.json();
+            const json = await res.json();
+            const data = json.d ? json.d.results : json;
             DB_CACHE['hms_users'] = data.hms_users || [];
             DB_CACHE['hms_appointments'] = data.hms_appointments || [];
             DB_CACHE['hms_resources'] = data.hms_resources || {};
             DB_CACHE['hms_allocations'] = data.hms_allocations || [];
+            DB_CACHE['hms_financials'] = data.hms_financials || [];
+            DB_CACHE['hms_purchasing'] = data.hms_purchasing || [];
             return true;
         }
     } catch(err) {
@@ -989,3 +992,30 @@ async function saveResourceInventory() {
         showToast('Server update failed!', 'error');
     }
 }
+
+// --- DARK MODE LOGIC (SAP Fiori Horizon) ---
+function toggleDarkMode() {
+    const html = document.documentElement;
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    // Fallback to body class toggle if documentElement doesn't have dark mode setup
+    if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('sap_theme', 'light');
+    } else {
+        body.classList.add('dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('sap_theme', 'dark');
+    }
+}
+
+// Check saved theme on load
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('sap_theme') === 'dark') {
+        document.body.classList.add('dark');
+        const icon = document.getElementById('theme-icon');
+        if(icon) icon.classList.replace('fa-moon', 'fa-sun');
+    }
+});
