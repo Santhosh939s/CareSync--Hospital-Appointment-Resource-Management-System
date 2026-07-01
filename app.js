@@ -1,4 +1,8 @@
-const API_URL = '/api';
+// Automatically route to local backend if running locally, otherwise use the live Render backend
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_URL = isLocalhost 
+    ? '/api' 
+    : 'https://hospital-appointment-and-resource.onrender.com/api';
 let DB_CACHE = { hms_users: [], hms_appointments: [], hms_resources: {} };
 
 const TIME_SLOTS = ['10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM', '04:00 PM'];
