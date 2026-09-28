@@ -16,10 +16,14 @@ try {
     localDataCached = require('./database.json');
 } catch (e) {
     try {
-        const fs = require('fs');
-        localDataCached = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json'), 'utf8'));
+        localDataCached = require('./database.sample.json');
     } catch (_) {
-        localDataCached = { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
+        try {
+            const fs = require('fs');
+            localDataCached = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.sample.json'), 'utf8'));
+        } catch (err) {
+            localDataCached = { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
+        }
     }
 }
 
