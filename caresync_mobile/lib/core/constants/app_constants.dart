@@ -25,6 +25,12 @@ class AppConstants {
     '04:00 PM',
   ];
 
+  /// Appointment statuses
+  static const String statusScheduled = 'Scheduled';
+  static const String statusCompleted = 'Completed';
+  static const String statusCancelled = 'Cancelled';
+  static const String statusPending = 'Pending';
+
   /// Roles
   static const String rolePatient = 'patient';
   static const String roleDoctor = 'doctor';

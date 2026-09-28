@@ -29,7 +29,7 @@ class _ScanBookingScreenState extends State<ScanBookingScreen> {
 
   final List<Map<String, dynamic>> _equipmentOptions = [
     {'name': 'MRI', 'icon': Icons.scanner_rounded, 'desc': 'Magnetic Resonance Imaging'},
-    {'name': 'CT-Scan', 'icon': Icons.radiology_rounded, 'desc': 'Computed Tomography 3D'},
+    {'name': 'CT-Scan', 'icon': Icons.medical_services_rounded, 'desc': 'Computed Tomography 3D'},
     {'name': 'X-Ray', 'icon': Icons.broken_image_outlined, 'desc': 'Digital Radiography'},
     {'name': 'Ventilator', 'icon': Icons.air_rounded, 'desc': 'Respiratory Support System'},
   ];

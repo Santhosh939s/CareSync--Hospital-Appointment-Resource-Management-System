@@ -6,31 +6,37 @@
 class AssignedResources {
   final bool bed;
   final BloodRequirement? blood;
+  final String? scan;
   final String? equipment;
 
   const AssignedResources({
     this.bed = false,
     this.blood,
+    this.scan,
     this.equipment,
   });
 
   factory AssignedResources.fromJson(Map<String, dynamic> json) {
+    final s = (json['scan'] ?? json['equipment']) as String?;
     return AssignedResources(
       bed: json['bed'] == true,
       blood: json['blood'] != null ? BloodRequirement.fromJson(json['blood'] as Map<String, dynamic>) : null,
-      equipment: json['equipment'] as String?,
+      scan: s,
+      equipment: s,
     );
   }
 
   Map<String, dynamic> toJson() {
+    final s = scan ?? equipment;
     return {
       if (bed) 'bed': true,
       if (blood != null) 'blood': blood!.toJson(),
-      if (equipment != null) 'equipment': equipment,
+      if (s != null) 'scan': s,
+      if (s != null) 'equipment': s,
     };
   }
 
-  bool get hasAny => bed || blood != null || equipment != null;
+  bool get hasAny => bed || blood != null || scan != null || equipment != null;
 }
 
 class BloodRequirement {
