@@ -1,25 +1,131 @@
-[        ] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-[        ] 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-[        ] 	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
-[        ] 	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
-[        ] 	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
-[        ] 	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:259)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:244)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:227)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:210)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:176)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:110)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:64)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:61)
+[        ] Task name matched 'assembleDebug'
+[        ] Selected primary task 'assembleDebug' from project :
+[ +499 ms] Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugKotlin
+[ +800 ms] Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileDebugAndroidTestKotlin
+[        ] Adding -Xuse-inline-scopes-numbers Kotlin compiler flag for task :app:compileProfileKotlin
+[ +100 ms] Tasks to be executed: [task ':app:DebugMinSdkCheck', task ':app:validateCompileSdkVersion', task ':app:preBuild', task ':app:preDebugBuild', task ':app:mergeDebugNativeDebugMetadata', task ':app:checkKotlinGradlePluginConfigurationErrors', task ':app:cleanMergeDebugAssets', task ':app:compileFlutterBuildDebug', task ':app:generateDebugAssets', task ':shared_preferences_android:generateDebugAssets', task ':shared_preferences_android:preBuild', task ':shared_preferences_android:preDebugBuild', task ':shared_preferences_android:mergeDebugAssets', task ':app:mergeDebugAssets', task ':app:copyFlutterAssetsDebug', task ':app:generateDebugResources', task ':app:packageDebugResources', task ':shared_preferences_android:processDebugNavigationResources', task ':app:processDebugNavigationResources', task ':app:parseDebugLocalResources', task ':app:generateDebugRFile', task ':shared_preferences_android:checkKotlinGradlePluginConfigurationErrors', task ':shared_preferences_android:generateDebugResources', task ':shared_preferences_android:packageDebugResources', task ':shared_preferences_android:parseDebugLocalResources', task ':shared_preferences_android:generateDebugRFile', task ':shared_preferences_android:compileDebugKotlin', task ':shared_preferences_android:javaPreCompileDebug', task ':shared_preferences_android:compileDebugJavaWithJavac', task ':shared_preferences_android:bundleLibCompileToJarDebug', task ':app:compileDebugKotlin', task ':app:javaPreCompileDebug', task ':app:compileDebugJavaWithJavac', task ':app:compressDebugAssets', task ':shared_preferences_android:bundleLibRuntimeToJarDebug', task ':app:desugarDebugFileDependencies', task ':shared_preferences_android:writeDebugAarMetadata', task ':app:checkDebugAarMetadata', task ':app:mapDebugSourceSetPaths', task ':app:compileDebugNavigationResources', task ':app:mergeDebugResources', task ':app:createDebugCompatibleScreenManifests', task ':app:extractDeepLinksDebug', task ':shared_preferences_android:extractDeepLinksDebug', task ':shared_preferences_android:processDebugManifest', task ':app:processDebugMainManifest', task ':app:outputDebugAppLinkSettings', task ':app:processDebugManifest', task ':app:processDebugManifestForPackage', task ':shared_preferences_android:mapDebugSourceSetPaths', task ':shared_preferences_android:compileDebugLibraryResources', task ':app:processDebugResources', task ':app:dexBuilderDebug', task ':app:mergeDebugGlobalSynthetics', task ':app:processDebugJavaRes', task ':shared_preferences_android:processDebugJavaRes', task ':app:mergeDebugJavaResource', task ':app:checkDebugDuplicateClasses', task ':app:mergeExtDexDebug', task ':shared_preferences_android:bundleLibRuntimeToDirDebug', task ':app:mergeLibDexDebug', task ':app:mergeProjectDexDebug', task ':app:copyJniLibsflutterBuildDebug', task ':app:mergeDebugJniLibFolders', task ':shared_preferences_android:mergeDebugJniLibFolders', task ':shared_preferences_android:mergeDebugNativeLibs', task ':shared_preferences_android:copyDebugJniLibsProjectOnly', task ':app:mergeDebugNativeLibs', task ':app:stripDebugDebugSymbols', task ':app:validateSigningDebug', task ':app:writeDebugAppMetadata', task ':app:writeDebugSigningConfigVersions', task ':app:packageDebug', task ':app:createDebugApkListingFileRedirect', task ':app:assembleDebug', task ':shared_preferences_android:checkDebugAarMetadata', task ':shared_preferences_android:stripDebugDebugSymbols', task ':shared_preferences_android:copyDebugJniLibsProjectAndLocalJars', task ':shared_preferences_android:extractDebugAnnotations', task ':shared_preferences_android:extractDeepLinksForAarDebug', task ':shared_preferences_android:mergeDebugGeneratedProguardFiles', task ':shared_preferences_android:mergeDebugConsumerProguardFiles', task ':shared_preferences_android:prepareDebugArtProfile', task ':shared_preferences_android:prepareLintJarForPublish', task ':shared_preferences_android:mergeDebugJavaResource', task ':shared_preferences_android:syncDebugLibJars', task ':shared_preferences_android:bundleDebugAar', task ':shared_preferences_android:assembleDebug']
+[        ] Tasks that were excluded: []
+[        ] work action Parameters of IdentityTransform (Thread[Execution worker,5,main]) started.
+[        ] work action Parameters of DexingNoClasspathTransform (Thread[Execution worker,5,main]) started.
+[        ] work action Parameters of DexingOutputSplitTransform (Thread[Execution worker,5,main]) started.
+[        ] work action Parameters of ClassesDirToClassesTransform (Thread[Execution worker,5,main]) started.
+[        ] work action Parameters of DexingOutputSplitTransform (Thread[Execution worker,5,main]) started.
+[        ] Resolve mutations for :app:DebugMinSdkCheck (Thread[Execution worker,5,main]) started.
+[        ] :app:DebugMinSdkCheck (Thread[Execution worker,5,main]) started.
+[        ] > Task :app:DebugMinSdkCheck
+[        ] Caching disabled for task ':app:DebugMinSdkCheck' because:
+[        ]   Build cache is disabled
+[        ] Task ':app:DebugMinSdkCheck' is not up-to-date because:
+[        ]   Task has not declared any outputs despite executing actions.
+[        ] Resolve mutations for :app:validateCompileSdkVersion (Thread[Execution worker,5,main]) started.
+[        ] :app:validateCompileSdkVersion (Thread[Execution worker,5,main]) started.
+[   +1 ms] > Task :app:validateCompileSdkVersion
+[        ] Caching disabled for task ':app:validateCompileSdkVersion' because:
+[        ]   Build cache is disabled
+[        ] Task ':app:validateCompileSdkVersion' is not up-to-date because:
+[        ]   Task has not declared any outputs despite executing actions.
+[        ] Resolve mutations for :app:preBuild (Thread[Execution worker,5,main]) started.
+[        ] :app:preBuild (Thread[Execution worker,5,main]) started.
+[        ] > Task :app:preBuild
+[        ] Skipping task ':app:preBuild' as it has no actions.
+[        ] Resolve mutations for :app:preDebugBuild (Thread[included builds,5,main]) started.
+--
+[        ] > Task :app:cleanMergeDebugAssets UP-TO-DATE
+[        ] Caching disabled for task ':app:cleanMergeDebugAssets' because:
+[        ]   Build cache is disabled
+[        ] Task ':app:cleanMergeDebugAssets' is not up-to-date because:
+[        ]   Task has not declared any outputs despite executing actions.
+[        ] Resolve mutations for :app:compileFlutterBuildDebug (Thread[Execution worker Thread 2,5,main]) started.
+[  +94 ms] :app:compileFlutterBuildDebug (Thread[Execution worker Thread 2,5,main]) started.
+[+2000 ms] > Task :app:compileFlutterBuildDebug
+[        ] Caching disabled for task ':app:compileFlutterBuildDebug' because:
+[        ]   Build cache is disabled
+[        ]   Caching has not been enabled for the task
+[        ] Task ':app:compileFlutterBuildDebug' is not up-to-date because:
+[        ]   No history is available.
+[        ] Starting process 'command '/opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/flutter''. Working directory: /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile Command: /opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/flutter --verbose assemble --no-version-check --depfile /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/build/app/intermediates/flutter/debug/flutter_build.d --output /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/build/app/intermediates/flutter/debug -dTargetFile=lib/main.dart -dTargetPlatform=android -dBuildMode=debug -dTrackWidgetCreation=true --DartDefines=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuNQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049NmExOWNjYTU2NA==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YWY3ZTc5NmUxNg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy40 -dFlavor= -dAndroidArchs=android-arm android-arm64 android-x64 -dMinSdkVersion=24 debug_android_application
+[        ] Successfully started process 'command '/opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/flutter''
+[        ] [  +24 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+--
+[        ] [   +2 ms] Done persisting file store
+[        ] [   +1 ms] "flutter assemble" took 7,428ms.
+[        ] [        ] Running 1 shutdown hook
+[        ] [        ] Shutdown hooks complete
+[        ] [        ] exiting with code 1
+[        ] > Task :app:compileFlutterBuildDebug FAILED
+[        ] [Incubating] Problems report is available at: file:///home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/build/reports/problems/problems-report.html
+[   +2 ms] [   +2 ms] Target kernel_snapshot_program failed: Exception
+[        ]            #0      KernelSnapshot.build (package:flutter_tools/src/build_system/targets/common.dart:315:7)
+[        ]            <asynchronous suspension>
+[        ]            #1      _BuildInstance._invokeInternal (package:flutter_tools/src/build_system/build_system.dart:937:9)
+[        ]            <asynchronous suspension>
+[        ]            #2      Future.wait.<anonymous closure> (dart:async/future.dart:567:21)
+[        ]            <asynchronous suspension>
+[        ]            #3      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:875:32)
+[        ]            <asynchronous suspension>
+[        ]            #4      Future.wait.<anonymous closure> (dart:async/future.dart:567:21)
+[        ]            <asynchronous suspension>
+[        ]            #5      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:875:32)
+[        ]            <asynchronous suspension>
+[        ]            #6      Future.wait.<anonymous closure> (dart:async/future.dart:567:21)
+[        ]            <asynchronous suspension>
+[        ]            #7      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:875:32)
+[        ]            <asynchronous suspension>
+[        ]            #8      FlutterBuildSystem.build (package:flutter_tools/src/build_system/build_system.dart:684:16)
+[        ]            <asynchronous suspension>
+[        ]            #9      AssembleCommand.runCommand (package:flutter_tools/src/commands/assemble.dart:369:32)
+[        ]            <asynchronous suspension>
+[        ]            #10     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1663:27)
+[        ]            <asynchronous suspension>
+[        ]            #11     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+--
+[        ]            <asynchronous suspension>
+[        ]            #11     main (package:flutter_tools/executable.dart:103:3)
+[        ]            <asynchronous suspension>
+[  +91 ms] FAILURE: Build failed with an exception.
+[        ] * What went wrong:
+[        ] Execution failed for task ':app:compileFlutterBuildDebug'.
+[        ] > Process 'command '/opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/flutter'' finished with non-zero exit value 1
+[        ] * Try:
+[        ] > Run with --debug option to get more log output.
+[        ] > Run with --scan to get full insights from a Build Scan (powered by Develocity).
+[        ] > Get more help at https://help.gradle.org.
+[        ] * Exception is:
+[        ] org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:compileFlutterBuildDebug'.
+[        ] 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:135)
+[        ] 	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+[        ] 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:133)
+[        ] 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:121)
+[        ] 	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+[        ] 	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+[        ] 	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+[        ] 	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+[        ] 	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+[        ] 	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+[        ] 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+[        ] 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+[        ] 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
@@ -27,124 +133,319 @@
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
 [        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:61)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:47)
-[        ] 	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
-[        ] 	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
-[        ] 	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
-[        ] 	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
-[        ] 	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
-[        ] 	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:70)
-[        ] 	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:40)
-[        ] 	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:25)
-[        ] 	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:62)
-[        ] 	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:27)
-[        ] 	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
-[        ] 	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
-[        ] 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
-[        ] 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
-[        ] 	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:25)
-[        ] 	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:192)
-[        ] 	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
-[        ] 	at org.gradle.internal.Either$Right.fold(Either.java:176)
-[        ] 	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
-[        ] 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
-[        ] 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
-[        ] 	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
-[        ] 	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
-[        ] 	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
-[        ] 	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
-[        ] 	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-[        ] 	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
-[        ] 	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
-[        ] 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
-[        ] 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
-[        ] 	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
-[        ] 	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
-[        ] 	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
-[        ] 	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
-[        ] 	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
-[        ] 	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
-[        ] 	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:25)
-[        ] 	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:64)
-[        ] 	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:42)
-[        ] 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:77)
-[        ] 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:46)
-[        ] 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:133)
-[        ] 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:59)
-[        ] 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
-[        ] 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
-[        ] 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
-[        ] 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
-[        ] 	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
-[        ] 	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
-[        ] 	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:25)
-[        ] 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
-[        ] 	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:305)
-[        ] 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
-[        ] 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
-[        ] 	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
-[        ] 	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
-[        ] 	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
-[        ] 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
-[        ] 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
-[        ] 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
-[        ] 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:44)
-[        ] 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:31)
-[        ] 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
-[        ] 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:132)
-[        ] 	... 33 more
-[        ] BUILD FAILED in 1m 39s
-[        ] [   +1 ms] "flutter assemble" took 7,100ms.
+[        ] 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+[        ] 	at org.gradle.execution.plan.DefaultNodeExecutor.executeLocalTaskNode(DefaultNodeExecutor.java:55)
+[        ] 	at org.gradle.execution.plan.DefaultNodeExecutor.execute(DefaultNodeExecutor.java:34)
+[        ] 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:355)
+[        ] 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:343)
+[        ] > Task :app:compileFlutterBuildDebug FAILED
+[        ] [Incubating] Problems report is available at: file:///home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/build/reports/problems/problems-report.html
+[   +2 ms] [   +2 ms] Target kernel_snapshot_program failed: Exception
+[        ]            #0      KernelSnapshot.build (package:flutter_tools/src/build_system/targets/common.dart:315:7)
+[        ]            <asynchronous suspension>
+[        ]            #1      _BuildInstance._invokeInternal (package:flutter_tools/src/build_system/build_system.dart:937:9)
+[        ]            <asynchronous suspension>
+[        ]            #2      Future.wait.<anonymous closure> (dart:async/future.dart:567:21)
+[        ]            <asynchronous suspension>
+[        ]            #3      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:875:32)
+[        ]            <asynchronous suspension>
+[        ]            #4      Future.wait.<anonymous closure> (dart:async/future.dart:567:21)
+[        ]            <asynchronous suspension>
+[        ] [   +2 ms] kernel_snapshot_program: Starting due to {}
+[        ] [  +10 ms] /opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/cache/dart-sdk/bin/dartaotruntime /opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/cache/dart-sdk/bin/snapshots/frontend_server_aot.dart.snapshot --sdk-root /opt/hostedtoolcache/flutter/stable-3.47.5-x64/flutter/bin/cache/artifacts/engine/common/flutter_patched_sdk/ --target=flutter --no-print-incremental-dependencies -DFLUTTER_BUILD_NAME=1.0.0 -DFLUTTER_BUILD_NUMBER=1 -DFLUTTER_VERSION=3.47.5 -DFLUTTER_CHANNEL=stable -DFLUTTER_GIT_URL=https://github.com/flutter/flutter.git -DFLUTTER_FRAMEWORK_REVISION=6a19cca564 -DFLUTTER_ENGINE_REVISION=af7e796e16 -DFLUTTER_DART_VERSION=3.13.4 -DFLUTTER_APP_FLAVOR= -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --no-link-platform --packages /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/package_config.json --output-dill /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/flutter_build/14633a15bdaffd313e93cb921a2257ec/app.dill --depfile /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/flutter_build/14633a15bdaffd313e93cb921a2257ec/kernel_snapshot_program.d --incremental --initialize-from-dill /home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/flutter_build/14633a15bdaffd313e93cb921a2257ec/app.dill --source file:///home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/flutter_build/dart_plugin_registrant.dart --source package:flutter/src/dart_plugin_registrant.dart -Dflutter.dart_plugin_registrant=file:///home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/.dart_tool/flutter_build/dart_plugin_registrant.dart --verbosity=error package:caresync_mobile/main.dart
+[        ] [ +445 ms] lib/screens/doctor/consultation_screen.dart:79:35: Error: A '$' has special meaning inside a string, and must be followed by an identifier or an expression in curly braces ({}).
+[   +1 ms] [   +2 ms] Try adding a backslash (\) to escape the '$'.
+[        ] [        ]             '• Consultation fee ($200) ledger logged\n'
+[        ] [        ]                                   ^
+[        ] [        ] lib/screens/doctor/consultation_screen.dart:80:56: Error: A '$' has special meaning inside a string, and must be followed by an identifier or an expression in curly braces ({}).
+[        ] [        ] Try adding a backslash (\) to escape the '$'.
+[        ] [        ]             '${_admitBed ? '• Hospital bed allocated ($500)\n' : ''}'
+[        ] [        ]                                                        ^
+[ +493 ms] [+1743 ms] lib/main.dart:11:22: Error: Member not found: 'LocalStorage.init'.
+[        ] [        ]   await LocalStorage.init();
+[        ] [        ]                      ^^^^
+[ +899 ms] [ +870 ms] lib/providers/appointment_provider.dart:51:76: Error: Member not found: 'statusScheduled'.
+[        ] [        ]         .where((a) => a.patientId == patientId && a.status == AppConstants.statusScheduled)
+[        ] [        ]                                                                            ^^^^^^^^^^^^^^^
+[        ] [        ] lib/providers/appointment_provider.dart:68:76: Error: Member not found: 'statusCompleted'.
+[        ] [        ]         .where((a) => a.patientId == patientId && a.status == AppConstants.statusCompleted)
+[        ] [        ]                                                                            ^^^^^^^^^^^^^^^
+[        ] [        ] lib/providers/appointment_provider.dart:109:74: Error: Member not found: 'statusScheduled'.
+[        ] [        ]         .where((a) => a.doctorId == doctorId && a.status == AppConstants.statusScheduled)
+[        ] [        ]                                                                          ^^^^^^^^^^^^^^^
+[        ] [        ] lib/providers/appointment_provider.dart:115:74: Error: Member not found: 'statusCompleted'.
+[        ] [        ]         .where((a) => a.doctorId == doctorId && a.status == AppConstants.statusCompleted)
+[        ] [        ]                                                                          ^^^^^^^^^^^^^^^
+[ +701 ms] [ +660 ms] lib/models/prescription.dart:57:26: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]       assignedResources?.scan != null &&
+[        ] [        ]                          ^^^^
+[        ] [        ] lib/models/prescription.dart:58:26: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]       assignedResources!.scan!.trim().isNotEmpty;
+[        ] [        ]                          ^^^^
+[        ] [        ] lib/services/appointment_service.dart:16:55: Error: Member not found: 'data'.
+[        ] [        ]       final response = await _client.get(ApiConstants.data);
+[        ] [        ]                                                       ^^^^
+[        ] [        ] lib/services/appointment_service.dart:27:13: Error: The method 'ApiException' isn't defined for the type 'AppointmentService'.
+[        ] [        ]  - 'AppointmentService' is from 'package:caresync_mobile/services/appointment_service.dart' ('lib/services/appointment_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Failed to retrieve appointments: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:60:39: Error: Member not found: 'statusCancelled'.
+[        ] [        ]           appt.status != AppConstants.statusCancelled) {
+[        ] [        ]                                       ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:81:38: Error: Too few positional arguments: 1 required, 0 given.
+[        ] [        ]       throw const ValidationException(
+[        ] [        ]                                      ^
+[        ] [        ] lib/core/exceptions/app_exceptions.dart:30:9: Context: Found this candidate, but the arguments don't match.
+[        ] [        ]   const ValidationException(super.message) : super(statusCode: 400);
+[        ] [        ]         ^^^^^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:92:34: Error: Member not found: 'statusCancelled'.
+[        ] [        ]         a.status != AppConstants.statusCancelled);
+[        ] [        ]                                  ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:95:38: Error: Too few positional arguments: 1 required, 0 given.
+[        ] [        ]       throw const ValidationException(
+[        ] [        ]                                      ^
+[        ] [        ] lib/core/exceptions/app_exceptions.dart:30:9: Context: Found this candidate, but the arguments don't match.
+[        ] [        ]   const ValidationException(super.message) : super(statusCode: 400);
+[        ] [        ]         ^^^^^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:108:30: Error: Member not found: 'statusScheduled'.
+[        ] [        ]       'status': AppConstants.statusScheduled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:116:19: Error: Not a constant expression.
+[        ] [        ]       throw const ApiException(message: 'Failed to record appointment on server.');
+[        ] [        ]                   ^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:128:20: Error: Member not found: 'ApiConstants.appointmentById'.
+[        ] [        ]       ApiConstants.appointmentById(appointmentId),
+[        ] [        ]                    ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/appointment_service.dart:134:19: Error: Not a constant expression.
+[        ] [        ]       throw const ApiException(message: 'Failed to update appointment status.');
+[        ] [        ]                   ^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:37:30: Error: Member not found: 'statusCompleted'.
+[        ] [        ]       'status': AppConstants.statusCompleted,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:45:22: Error: Member not found: 'ApiConstants.appointmentById'.
+[        ] [        ]         ApiConstants.appointmentById(appointmentId),
+[        ] [        ]                      ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:51:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Failed to record consultation result.');
+[        ] [   +1 ms]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:58:13: Error: The method 'ApiException' isn't defined for the type 'ConsultationService'.
+[        ] [        ]  - 'ConsultationService' is from 'package:caresync_mobile/services/consultation_service.dart' ('lib/services/consultation_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Consultation completion failed: ${e.toString()}');
+[        ] [   +1 ms]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:79:22: Error: Member not found: 'ApiConstants.appointmentById'.
+[        ] [        ]         ApiConstants.appointmentById(appointmentId),
+[        ] [        ]                      ^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:85:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Failed to update prescription.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/consultation_service.dart:92:13: Error: The method 'ApiException' isn't defined for the type 'ConsultationService'.
+[        ] [        ]  - 'ConsultationService' is from 'package:caresync_mobile/services/consultation_service.dart' ('lib/services/consultation_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Prescription update failed: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/doctor_service.dart:15:55: Error: Member not found: 'data'.
+[        ] [        ]       final response = await _client.get(ApiConstants.data);
+[        ] [        ]                                                       ^^^^
+[        ] [        ] lib/services/doctor_service.dart:28:13: Error: The method 'ApiException' isn't defined for the type 'DoctorService'.
+[        ] [        ]  - 'DoctorService' is from 'package:caresync_mobile/services/doctor_service.dart' ('lib/services/doctor_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Failed to load doctors: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/notification_service.dart:14:32: Error: The method 'getViewedPrescriptionIds' isn't defined for the type 'LocalStorage'.
+[        ] [        ]  - 'LocalStorage' is from 'package:caresync_mobile/core/storage/local_storage.dart' ('lib/core/storage/local_storage.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'getViewedPrescriptionIds'.
+[        ] [        ]     final viewedIds = _storage.getViewedPrescriptionIds();
+[        ] [        ]                                ^^^^^^^^^^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/notification_service.dart:20:32: Error: The method 'getViewedPrescriptionIds' isn't defined for the type 'LocalStorage'.
+[        ] [        ]  - 'LocalStorage' is from 'package:caresync_mobile/core/storage/local_storage.dart' ('lib/core/storage/local_storage.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'getViewedPrescriptionIds'.
+[        ] [        ]     final viewedIds = _storage.getViewedPrescriptionIds();
+[        ] [        ]                                ^^^^^^^^^^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/notification_service.dart:28:20: Error: The method 'markPrescriptionViewed' isn't defined for the type 'LocalStorage'.
+[        ] [        ]  - 'LocalStorage' is from 'package:caresync_mobile/core/storage/local_storage.dart' ('lib/core/storage/local_storage.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'markPrescriptionViewed'.
+[        ] [        ]     await _storage.markPrescriptionViewed(appointmentId);
+[        ] [        ]                    ^^^^^^^^^^^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:34:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Malformed user profile received from server.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:38:31: Error: The argument type 'User' can't be assigned to the parameter type 'Map<String, dynamic>'.
+[        ] [   +1 ms]  - 'User' is from 'package:caresync_mobile/models/user.dart' ('lib/models/user.dart').
+[        ] [        ]  - 'Map' is from 'dart:core'.
+[        ] [        ]       await _storage.saveUser(user);
+[        ] [        ]                               ^
+[        ] [        ] lib/services/auth_service.dart:43:13: Error: The method 'ApiException' isn't defined for the type 'AuthService'.
+[        ] [        ]  - 'AuthService' is from 'package:caresync_mobile/services/auth_service.dart' ('lib/services/auth_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Failed to complete login: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:57:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Guest account not found.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:61:31: Error: The argument type 'User' can't be assigned to the parameter type 'Map<String, dynamic>'.
+[        ] [        ]  - 'User' is from 'package:caresync_mobile/models/user.dart' ('lib/models/user.dart').
+[        ] [        ]  - 'Map' is from 'dart:core'.
+[        ] [        ]       await _storage.saveUser(user);
+[        ] [        ]                               ^
+[        ] [        ] lib/services/auth_service.dart:66:13: Error: The method 'ApiException' isn't defined for the type 'AuthService'.
+[        ] [        ]  - 'AuthService' is from 'package:caresync_mobile/services/auth_service.dart' ('lib/services/auth_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Guest login failed: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:79:22: Error: Member not found: 'users'.
+[        ] [        ]         ApiConstants.users,
+[        ] [        ]                      ^^^^^
+[        ] [        ] lib/services/auth_service.dart:91:21: Error: Not a constant expression.
+[        ] [   +1 ms]         throw const ApiException(message: 'Failed to create patient account.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:95:31: Error: The argument type 'User' can't be assigned to the parameter type 'Map<String, dynamic>'.
+[        ] [        ]  - 'User' is from 'package:caresync_mobile/models/user.dart' ('lib/models/user.dart').
+[        ] [        ]  - 'Map' is from 'dart:core'.
+[        ] [        ]       await _storage.saveUser(user);
+[        ] [        ]                               ^
+[        ] [        ] lib/services/auth_service.dart:100:13: Error: The method 'ApiException' isn't defined for the type 'AuthService'.
+[        ] [        ]  - 'AuthService' is from 'package:caresync_mobile/services/auth_service.dart' ('lib/services/auth_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Registration failed: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/auth_service.dart:106:21: Error: A value of type 'Future<Map<String, dynamic>?>' can't be returned from a function with return type 'User?'.
+[        ] [        ]  - 'Future' is from 'dart:async'.
+[        ] [        ]  - 'Map' is from 'dart:core'.
+[        ] [        ]  - 'User' is from 'package:caresync_mobile/models/user.dart' ('lib/models/user.dart').
+[        ] [        ]     return _storage.getUser();
+[        ] [        ]                     ^
+[        ] [        ] lib/services/auth_service.dart:111:20: Error: The method 'clearSession' isn't defined for the type 'LocalStorage'.
+[        ] [        ]  - 'LocalStorage' is from 'package:caresync_mobile/core/storage/local_storage.dart' ('lib/core/storage/local_storage.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'clearSession'.
+[        ] [        ]     await _storage.clearSession();
+[        ] [        ]                    ^^^^^^^^^^^^
+[        ] [        ] lib/services/resource_service.dart:18:55: Error: Member not found: 'data'.
+[        ] [        ]       final response = await _client.get(ApiConstants.data);
+[        ] [        ]                                                       ^^^^
+[        ] [        ] lib/services/resource_service.dart:24:13: Error: The method 'ApiException' isn't defined for the type 'ResourceService'.
+[        ] [        ]  - 'ResourceService' is from 'package:caresync_mobile/services/resource_service.dart' ('lib/services/resource_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Failed to retrieve hospital data: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/resource_service.dart:85:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Failed to schedule scan allocation.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/resource_service.dart:92:13: Error: The method 'ApiException' isn't defined for the type 'ResourceService'.
+[        ] [        ]  - 'ResourceService' is from 'package:caresync_mobile/services/resource_service.dart' ('lib/services/resource_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Failed to schedule scan: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [        ] lib/services/resource_service.dart:106:21: Error: Not a constant expression.
+[        ] [        ]         throw const ApiException(message: 'Failed to update resource levels.');
+[        ] [        ]                     ^^^^^^^^^^^^
+[        ] [        ] lib/services/resource_service.dart:113:13: Error: The method 'ApiException' isn't defined for the type 'ResourceService'.
+[        ] [        ]  - 'ResourceService' is from 'package:caresync_mobile/services/resource_service.dart' ('lib/services/resource_service.dart').
+[        ] [        ] Try correcting the name to the name of an existing method, or defining a method named 'ApiException'.
+[        ] [        ]       throw ApiException(message: 'Update failed: ${e.toString()}');
+[        ] [        ]             ^^^^^^^^^^^^
+[        ] [   +1 ms] lib/screens/admin/appointments_management_screen.dart:82:30: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 AppConstants.statusCancelled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/admin/appointments_management_screen.dart:81:30: Error: Member not found: 'statusCompleted'.
+[        ] [        ]                 AppConstants.statusCompleted,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/admin/appointments_management_screen.dart:80:30: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                 AppConstants.statusScheduled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/admin/appointments_management_screen.dart:119:76: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                         final canForceCancel = appt.status == AppConstants.statusScheduled;
+[        ] [        ]                                                                            ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/admin/appointments_management_screen.dart:171:38: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 status: AppConstants.statusCancelled,
+[        ] [        ]                                      ^^^^^^^^^^^^^^^
+[        ] [   +4 ms] lib/screens/doctor/doctor_home_screen.dart:208:65: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                     trailingAction: appt.status == AppConstants.statusScheduled
+[        ] [        ]                                                                 ^^^^^^^^^^^^^^^
+[   +1 ms] [        ] lib/screens/doctor/doctor_home_screen.dart:219:56: Error: Member not found: 'statusCompleted'.
+[        ] [        ]                         : (appt.status == AppConstants.statusCompleted
+[        ] [        ]                                                        ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_home_screen.dart:232:55: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                       if (appt.status == AppConstants.statusScheduled) {
+[        ] [        ]                                                       ^^^^^^^^^^^^^^^
+[        ] [   +1 ms] lib/screens/doctor/doctor_schedule_screen.dart:107:30: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 AppConstants.statusCancelled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_schedule_screen.dart:106:30: Error: Member not found: 'statusCompleted'.
+[        ] [        ]                 AppConstants.statusCompleted,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_schedule_screen.dart:105:30: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                 AppConstants.statusScheduled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_schedule_screen.dart:146:73: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                         final isScheduled = appt.status == AppConstants.statusScheduled;
+[        ] [        ]                                                                         ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_schedule_screen.dart:147:73: Error: Member not found: 'statusCompleted'.
+[        ] [        ]                         final isCompleted = appt.status == AppConstants.statusCompleted;
+[        ] [        ]                                                                         ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/doctor/doctor_schedule_screen.dart:219:38: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 status: AppConstants.statusCancelled,
+[        ] [        ]                                      ^^^^^^^^^^^^^^^
+[        ] [   +2 ms] lib/screens/patient/appointment_details_screen.dart:29:58: Error: Member not found: 'statusScheduled'.
+[        ] [        ]     final canCancel = appointment.status == AppConstants.statusScheduled;
+[        ] [        ]                                                          ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/patient/appointment_details_screen.dart:30:60: Error: Member not found: 'statusCompleted'.
+[        ] [        ]     final isCompleted = appointment.status == AppConstants.statusCompleted;
+[        ] [        ]                                                            ^^^^^^^^^^^^^^^
+[        ] [   +1 ms] lib/screens/patient/appointment_details_screen.dart:238:38: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 status: AppConstants.statusCancelled,
+[        ] [        ]                                      ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/patient/appointments_screen.dart:58:30: Error: Member not found: 'statusCancelled'.
+[        ] [        ]                 AppConstants.statusCancelled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/patient/appointments_screen.dart:57:30: Error: Member not found: 'statusCompleted'.
+[        ] [        ]                 AppConstants.statusCompleted,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [        ] lib/screens/patient/appointments_screen.dart:56:30: Error: Member not found: 'statusScheduled'.
+[        ] [        ]                 AppConstants.statusScheduled,
+[        ] [        ]                              ^^^^^^^^^^^^^^^
+[        ] [  +16 ms] lib/screens/patient/prescription_details_screen.dart:229:59: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]                         ? prescription.assignedResources!.scan!
+[        ] [        ]                                                           ^^^^
+[        ] [        ] lib/screens/patient/prescription_details_screen.dart:241:81: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]                 title: 'Book Prescribed Scan (${prescription.assignedResources!.scan})',
+[        ] [        ]                                                                                 ^^^^
+[        ] [        ] lib/screens/patient/prescription_details_screen.dart:246:64: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]                     arguments: prescription.assignedResources!.scan,
+[        ] [        ]                                                                ^^^^
+[        ] [        ] lib/screens/patient/prescriptions_screen.dart:152:66: Error: The getter 'scan' isn't defined for the type 'AssignedResources'.
+[        ] [        ]  - 'AssignedResources' is from 'package:caresync_mobile/models/appointment.dart' ('lib/models/appointment.dart').
+[        ] [        ] Try correcting the name to the name of an existing getter, or defining a getter or field named 'scan'.
+[        ] [        ]                                   'Scan: ${rx.assignedResources!.scan}',
+[        ] [        ]                                                                  ^^^^
+[        ] [        ] lib/screens/patient/scan_booking_screen.dart:32:39: Error: Member not found: 'radiology_rounded'.
+[        ] [        ]     {'name': 'CT-Scan', 'icon': Icons.radiology_rounded, 'desc': 'Computed Tomography 3D'},
+[        ] [        ]                                       ^^^^^^^^^^^^^^^^^
+[ +881 ms] [ +823 ms] lib/widgets/status_badge.dart:21:25: Error: Member not found: 'statusCompleted'.
+[        ] [        ]       case AppConstants.statusCompleted:
+[        ] [        ]                         ^^^^^^^^^^^^^^^
+[        ] [        ] lib/widgets/status_badge.dart:25:25: Error: Member not found: 'statusCancelled'.
+[        ] [        ]       case AppConstants.statusCancelled:
+[        ] [        ]                         ^^^^^^^^^^^^^^^
+[        ] [        ] lib/widgets/status_badge.dart:29:25: Error: Member not found: 'statusScheduled'.
+[        ] [        ]       case AppConstants.statusScheduled:
+[        ] [        ]                         ^^^^^^^^^^^^^^^
+[+2501 ms] [+2523 ms] Persisting file store
+[        ] [   +2 ms] Done persisting file store
+[        ] [   +1 ms] "flutter assemble" took 7,428ms.
 [        ] [        ] Running 1 shutdown hook
 [        ] [        ] Shutdown hooks complete
 [        ] [        ] exiting with code 1
 [        ] > Task :app:compileFlutterBuildDebug FAILED
 [        ] [Incubating] Problems report is available at: file:///home/runner/work/CareSync--Hospital-Appointment-Resource-Management-System/CareSync--Hospital-Appointment-Resource-Management-System/caresync_mobile/build/reports/problems/problems-report.html
-[        ] Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
-[        ] You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
-[        ] For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
-[        ] 8 actionable tasks: 3 executed, 5 up-to-date
-[ +450 ms] Running Gradle task 'assembleDebug'... (completed in 100.0s)
-[   +1 ms] executing: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64/bin/java --version
-[  +38 ms] Exit code 0 from: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.20-8/x64/bin/java --version
-[        ] openjdk 17.0.20 2026-07-21 LTS
-           OpenJDK Runtime Environment Zulu17.68+19-CRaC-CA (build 17.0.20+8-LTS)
-           OpenJDK 64-Bit Server VM Zulu17.68+19-CRaC-CA (build 17.0.20+8-LTS, mixed mode, sharing)
-[   +3 ms] "flutter apk" took 100,347ms.
-[   +2 ms] Gradle task assembleDebug failed with exit code 1
-[        ] 
-           #0      throwToolExit (package:flutter_tools/src/base/common.dart:34:3)
-           #1      AndroidGradleBuilder.buildGradleApp (package:flutter_tools/src/android/gradle.dart:653:7)
-           <asynchronous suspension>
-           #2      AndroidGradleBuilder.buildApk (package:flutter_tools/src/android/gradle.dart:246:5)
-           <asynchronous suspension>
-           #3      BuildApkCommand.runCommand (package:flutter_tools/src/commands/build_apk.dart:132:5)
-           <asynchronous suspension>
-           #4      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1663:27)
-           <asynchronous suspension>
-           #5      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
-           <asynchronous suspension>
-           #6      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
-           <asynchronous suspension>
-           #7      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:496:9)
-           <asynchronous suspension>
-           #8      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
-           <asynchronous suspension>
-           #9      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:431:5)
-           <asynchronous suspension>
-           #10     FlutterCommandRunner.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:307:33)
-           <asynchronous suspension>
-           #11     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:104:11)
-           <asynchronous suspension>
-           #12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
-           <asynchronous suspension>
-           #13     main (package:flutter_tools/executable.dart:103:3)
-           <asynchronous suspension>
-
-
-[        ] Running 1 shutdown hook
-[        ] Shutdown hooks complete
-[        ] exiting with code 1
