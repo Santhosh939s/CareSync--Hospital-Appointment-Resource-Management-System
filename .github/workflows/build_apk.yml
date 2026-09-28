@@ -51,10 +51,10 @@ jobs:
           yes | flutter doctor --android-licenses || true
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
 
-      - name: Build Android APK
+      - name: Build Android APK (Optimized Production Release)
         run: |
           cd caresync_mobile
-          flutter build apk --debug --verbose > ../build.log 2>&1 || {
+          flutter build apk --release --verbose > ../build.log 2>&1 || {
             echo "=== FLUTTER ASSEMBLE ERRORS ==="
             grep -B 5 -A 25 "compileFlutterBuild" ../build.log || true
             grep -B 2 -A 10 "Target .* failed" ../build.log || true
@@ -66,7 +66,7 @@ jobs:
             } > ../build_error_details.txt
             exit 1
           }
-          ls -la build/app/outputs/flutter-apk/
+          ls -lh build/app/outputs/flutter-apk/
 
       - name: Save Diagnostic Error If Failed
         if: failure()
@@ -81,8 +81,11 @@ jobs:
       - name: Prepare Release Artifacts
         run: |
           mkdir -p release-output downloads
-          APK_FILE=$(find caresync_mobile/build/app/outputs/flutter-apk -name "*.apk" | head -n 1)
-          echo "Found compiled APK: $APK_FILE"
+          APK_FILE=$(find caresync_mobile/build/app/outputs/flutter-apk -name "*release*.apk" | head -n 1)
+          if [ -z "$APK_FILE" ]; then
+            APK_FILE=$(find caresync_mobile/build/app/outputs/flutter-apk -name "*.apk" | head -n 1)
+          fi
+          echo "Found compiled release APK: $APK_FILE"
           ls -lh "$APK_FILE"
           cp "$APK_FILE" release-output/caresync-v1.0.0-release.apk
           cp "$APK_FILE" downloads/caresync.apk
