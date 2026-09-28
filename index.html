@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareSync - Hospital Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CareSync">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>CareSync - Hospital Management & Resource System</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,38 +45,41 @@
 
     <!-- Main Navigation -->
     <nav class="bg-white dark:bg-credCard shadow-sm sticky top-0 z-40 border-b border-gray-100 dark:border-gray-800 backdrop-filter backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center cursor-pointer" onclick="navigateTo('landing')">
-                    <div class="bg-teal-600 rounded-lg p-2 mr-3 flex items-center justify-center transform transition hover:rotate-12">
-                        <i class="fa-solid fa-staff-snake text-white text-xl"></i>
+                    <div class="bg-teal-600 rounded-lg p-2 mr-2.5 sm:mr-3 flex items-center justify-center transform transition hover:rotate-12 shrink-0">
+                        <i class="fa-solid fa-staff-snake text-white text-lg sm:text-xl"></i>
                     </div>
-                    <span class="font-bold text-2xl tracking-tight text-gray-900 dark:text-white">Care<span class="text-teal-600">Sync</span> <span class="text-xs font-medium text-teal-600 dark:text-teal-400 ml-1.5 px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800">Trust & Velocity</span></span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-bold text-xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">Care<span class="text-teal-600">Sync</span></span>
+                        <span class="hidden sm:inline-block text-[10px] sm:text-xs font-semibold text-teal-600 dark:text-teal-400 px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800">Trust & Velocity</span>
+                    </div>
                 </div>
                 
                 <!-- Nav Links -->
-                <div class="flex items-center space-x-4">
-                    <button onclick="toggleDarkMode()" class="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-white transition-colors mr-2">
-                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button onclick="toggleDarkMode()" aria-label="Toggle Theme" class="p-2 text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-white transition-colors">
+                        <i id="theme-icon" class="fa-solid fa-moon text-base sm:text-lg"></i>
                     </button>
-                    <!-- Download Mobile App Button -->
-                    <button onclick="openAppDownloadModal()" class="hidden sm:inline-flex bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/50 hover:bg-teal-100 dark:hover:bg-teal-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold items-center gap-2 transition-all">
-                        <i class="fa-solid fa-mobile-screen"></i> Get Mobile App
+                    <!-- Download Mobile App Button (Visible on ALL devices) -->
+                    <button onclick="openAppDownloadModal()" class="inline-flex bg-teal-50 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/60 hover:bg-teal-100 dark:hover:bg-teal-900/60 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+                        <i class="fa-solid fa-mobile-screen text-xs"></i> <span>Get App</span>
                     </button>
                     <!-- Unauthenticated -->
-                    <div id="nav-unauth" class="flex items-center space-x-6">
-                        <button onclick="navigateTo('login')" class="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-white font-semibold transition-colors text-sm">Login / Sign In</button>
+                    <div id="nav-unauth" class="flex items-center">
+                        <button onclick="navigateTo('login')" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-3 py-1.5 rounded-xl text-xs sm:text-sm transition-colors">Sign In</button>
                     </div>
                     
                     <!-- Authenticated -->
-                    <div id="nav-auth" class="hidden items-center space-x-4">
-                        <div class="bg-teal-50 dark:bg-gray-800 px-3 py-1.5 rounded-full border border-teal-100 dark:border-gray-700 flex items-center">
-                            <i class="fa-solid fa-user-circle text-teal-600 mr-2 text-lg"></i>
-                            <span id="nav-user-name" class="text-sm font-semibold text-teal-900 dark:text-gray-200 mr-2">Welcome</span>
+                    <div id="nav-auth" class="hidden items-center space-x-2">
+                        <div class="bg-teal-50 dark:bg-gray-800 px-2.5 py-1 rounded-full border border-teal-100 dark:border-gray-700 flex items-center max-w-[120px] sm:max-w-none">
+                            <i class="fa-solid fa-user-circle text-teal-600 mr-1.5 text-base shrink-0"></i>
+                            <span id="nav-user-name" class="text-xs sm:text-sm font-semibold text-teal-900 dark:text-gray-200 truncate">Welcome</span>
                         </div>
-                        <button onclick="logout()" class="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 bg-white dark:bg-credCard border border-gray-200 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-500 rounded-lg px-3 py-1.5 font-medium transition-all flex items-center gap-2 text-sm shadow-sm">
-                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        <button onclick="logout()" class="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 bg-white dark:bg-credCard border border-gray-200 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-500 rounded-xl px-2.5 py-1.5 font-medium transition-all flex items-center gap-1 text-xs shadow-sm">
+                            <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Logout</span>
                         </button>
                     </div>
                 </div>
@@ -83,69 +92,77 @@
 
         <!-- 1. LANDING PAGE -->
         <section id="view-landing" class="page-view active flex-grow bg-white dark:bg-credDarker">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     <div>
-                        <span class="uppercase tracking-widest text-xs font-bold text-teal-600 dark:text-teal-400 mb-3 block">Crafted for Trust & Velocity</span>
-                        <h1 class="text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6 mt-2 tracking-tight">
+                        <span class="uppercase tracking-widest text-xs font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-3 block">Crafted for Trust & Velocity</span>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 sm:mb-6 mt-1 tracking-tight">
                             Healthcare Orchestration, <br/>
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-emerald-400 to-cyan-400">Engineered with Obsession.</span>
                         </h1>
-                        <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
+                        <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-lg leading-relaxed">
                             A disruptive ecosystem bringing radical trust and transparency to clinical operations. Instant slot reservations, automated transparent billing ledgers, and zero-latency hospital resource orchestration.
                         </p>
-                        <div class="flex flex-wrap gap-4 items-center">
-                            <button onclick="navigateTo('login')" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-teal-500/25 transition-all transform hover:-translate-y-0.5">
+                        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                            <button onclick="navigateTo('login')" class="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white px-6 sm:px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-teal-500/25 transition-all text-center active:scale-95">
                                 Launch CareSync Console
                             </button>
-                            <button onclick="openAppDownloadModal()" class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white px-6 py-3.5 rounded-xl font-semibold border border-gray-200 dark:border-gray-700 transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-mobile-screen text-teal-600 dark:text-teal-400"></i> Get Flutter App
+                            <button onclick="openAppDownloadModal()" class="w-full sm:w-auto bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white px-6 py-3.5 rounded-xl font-semibold border border-gray-200 dark:border-gray-700 transition-all flex items-center justify-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-mobile-screen text-teal-600 dark:text-teal-400"></i> Get Mobile App
                             </button>
                         </div>
 
-
-                    </div>
-                    <div class="relative hidden lg:block">
-                        <!-- Abstract decorative shapes -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-[40px] transform rotate-3 scale-105 -z-10 transition-colors duration-300"></div>
-                        
-                        <!-- Guest Access Section -->
-                        <div class="glass-panel dark:bg-credCard p-6 rounded-3xl relative overflow-hidden border dark:border-gray-700 mb-6 bg-white shadow-xl z-10 text-center">
-                            <h3 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-3">Experience the platform with guest logins</h3>
-                            <div class="flex justify-center gap-2">
-                                <button onclick="loginAsGuest('patient')" class="flex-1 bg-white dark:bg-gray-800 border-2 border-teal-500 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-gray-700 font-semibold py-2 px-2 rounded-lg transition-all text-xs shadow-sm flex flex-col items-center gap-1">
-                                    <i class="fa-solid fa-user-injured text-lg"></i> Patient
+                        <!-- 1-Tap Guest Access (Visible on Mobile & Desktop) -->
+                        <div class="mt-8 glass-panel dark:bg-credCard p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-gray-100 dark:border-gray-700/80 bg-white shadow-lg text-center">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bolt text-teal-500"></i> Instant 1-Tap Demo
+                                </h3>
+                                <span class="text-[10px] text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded-full font-semibold">No password needed</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="loginAsGuest('patient')" class="bg-teal-50/50 dark:bg-gray-800/80 border-2 border-teal-500 text-teal-700 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-gray-700 font-bold py-2.5 px-2 rounded-xl transition-all text-xs shadow-sm flex flex-col items-center gap-1 active:scale-95">
+                                    <i class="fa-solid fa-user-injured text-lg"></i>
+                                    <span>Patient</span>
                                 </button>
-                                <button onclick="loginAsGuest('doctor')" class="flex-1 bg-white dark:bg-gray-800 border-2 border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 font-semibold py-2 px-2 rounded-lg transition-all text-xs shadow-sm flex flex-col items-center gap-1">
-                                    <i class="fa-solid fa-user-doctor text-lg"></i> Doctor
+                                <button onclick="loginAsGuest('doctor')" class="bg-blue-50/50 dark:bg-gray-800/80 border-2 border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700 font-bold py-2.5 px-2 rounded-xl transition-all text-xs shadow-sm flex flex-col items-center gap-1 active:scale-95">
+                                    <i class="fa-solid fa-user-doctor text-lg"></i>
+                                    <span>Doctor</span>
                                 </button>
-                                <button onclick="loginAsGuest('admin')" class="flex-1 bg-white dark:bg-gray-800 border-2 border-purple-500 text-purple-700 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-gray-700 font-semibold py-2 px-2 rounded-lg transition-all text-xs shadow-sm flex flex-col items-center gap-1">
-                                    <i class="fa-solid fa-user-tie text-lg"></i> Admin
+                                <button onclick="loginAsGuest('admin')" class="bg-purple-50/50 dark:bg-gray-800/80 border-2 border-purple-500 text-purple-700 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-gray-700 font-bold py-2.5 px-2 rounded-xl transition-all text-xs shadow-sm flex flex-col items-center gap-1 active:scale-95">
+                                    <i class="fa-solid fa-user-tie text-lg"></i>
+                                    <span>Admin</span>
                                 </button>
                             </div>
                         </div>
 
-                        <div class="glass-panel dark:bg-credCard p-8 rounded-3xl relative overflow-hidden border dark:border-gray-700 shadow-2xl">
+                    </div>
+                    <div class="relative">
+                        <!-- Abstract decorative shapes -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-teal-100/50 to-indigo-50/50 dark:from-gray-800 dark:to-gray-900 rounded-[32px] sm:rounded-[40px] transform rotate-2 scale-105 -z-10 transition-colors duration-300"></div>
+
+                        <div class="glass-panel dark:bg-credCard p-6 sm:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden border border-gray-100 dark:border-gray-700/80 shadow-2xl">
                             <div class="absolute top-0 right-0 p-4 opacity-10">
-                                <i class="fa-solid fa-shield-halved text-9xl text-teal-600"></i>
+                                <i class="fa-solid fa-shield-halved text-8xl sm:text-9xl text-teal-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-4 z-10 relative dark:text-white">CareSync Core Pillars</h3>
-                            <ul class="space-y-4 relative z-10">
+                            <h3 class="text-lg sm:text-xl font-bold mb-4 z-10 relative dark:text-white">CareSync Core Pillars</h3>
+                            <ul class="space-y-4 relative z-10 text-left">
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-teal-100 dark:bg-teal-950/60 p-2 rounded text-teal-600 dark:text-teal-400 mt-0.5"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                                    <div><p class="font-bold dark:text-gray-200">Transparent Cost Ledger</p><p class="text-sm text-gray-500 dark:text-gray-400">Zero hidden charges. Real-time itemized billing for consultations, bed allocations, and scans.</p></div>
+                                    <div class="bg-teal-100 dark:bg-teal-950/60 p-2 rounded-xl text-teal-600 dark:text-teal-400 mt-0.5 shrink-0"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                                    <div><p class="font-bold text-sm sm:text-base dark:text-gray-200">Transparent Cost Ledger</p><p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Zero hidden charges. Real-time itemized billing for consultations, bed allocations, and scans.</p></div>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-indigo-100 dark:bg-indigo-950/60 p-2 rounded text-indigo-600 dark:text-indigo-400 mt-0.5"><i class="fa-solid fa-boxes-stacked"></i></div>
-                                    <div><p class="font-bold dark:text-gray-200">Live Resource Orchestration</p><p class="text-sm text-gray-500 dark:text-gray-400">Real-time bed telemetry and 8-type blood bank inventory with automated threshold replenishment.</p></div>
+                                    <div class="bg-indigo-100 dark:bg-indigo-950/60 p-2 rounded-xl text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                    <div><p class="font-bold text-sm sm:text-base dark:text-gray-200">Live Resource Orchestration</p><p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Real-time bed telemetry and 8-type blood bank inventory with automated threshold replenishment.</p></div>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="bg-emerald-100 dark:bg-emerald-950/60 p-2 rounded text-emerald-600 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                                    <div><p class="font-bold dark:text-gray-200">Pixel-Perfect Flutter Experience</p><p class="text-sm text-gray-500 dark:text-gray-400">Native 60 FPS mobile client with sound null safety, offline session caching, and zero jank.</p></div>
+                                    <div class="bg-emerald-100 dark:bg-emerald-950/60 p-2 rounded-xl text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                                    <div><p class="font-bold text-sm sm:text-base dark:text-gray-200">Pixel-Perfect Flutter Experience</p><p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Native 60 FPS mobile client with sound null safety, offline session caching, and zero jank.</p></div>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </section>
@@ -592,70 +609,173 @@
         }
 
         function openAppDownloadModal() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-            // Direct download if user is on an Android device
-            if (/android/i.test(userAgent)) {
-                window.open('https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases', '_blank');
-                return;
-            }
-
-            // Direct link if user is on iOS (iPhone / iPad)
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.open('https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System#readme', '_blank');
-                return;
-            }
-
-            // If on Desktop/Laptop, display the smart download modal
-            document.getElementById('app-download-modal').classList.remove('hidden');
+            const modal = document.getElementById('app-download-modal');
+            modal.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                const content = modal.querySelector('.modal-content');
+                if (content) {
+                    content.classList.remove('scale-95', 'translate-y-4');
+                    content.classList.add('scale-100', 'translate-y-0');
+                }
+            }, 10);
         }
 
         function closeAppDownloadModal() {
-            document.getElementById('app-download-modal').classList.add('hidden');
+            const modal = document.getElementById('app-download-modal');
+            const content = modal.querySelector('.modal-content');
+            if (content) {
+                content.classList.add('scale-95', 'translate-y-4');
+                content.classList.remove('scale-100', 'translate-y-0');
+            }
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function copyFlutterRunCommand() {
+            const cmd = "git clone https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System.git && cd caresync_mobile && flutter run";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(cmd).then(() => {
+                    showToast("Command copied! Run in terminal to launch Flutter app.", "success");
+                }).catch(() => {
+                    prompt("Copy Flutter Run Command:", cmd);
+                });
+            } else {
+                prompt("Copy Flutter Run Command:", cmd);
+            }
         }
     </script>
     
-    <!-- Mobile App Download Modal (Desktop Visitors) -->
-    <div id="app-download-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 border border-gray-100 dark:border-gray-700 transform transition-all text-center">
+    <!-- Mobile App Download & Installation Hub Modal -->
+    <div id="app-download-modal" class="hidden opacity-0 fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-200">
+        <div class="modal-content scale-95 translate-y-4 bg-white dark:bg-credCard rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-5 sm:p-6 border border-gray-100 dark:border-gray-700/80 transform transition-all text-left">
+            
+            <!-- Mobile Drag Handle -->
+            <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full mx-auto mb-4 sm:hidden"></div>
+
             <div class="flex justify-between items-center pb-4 border-b border-gray-100 dark:border-gray-700">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white">
-                        <i class="fa-solid fa-mobile-screen text-lg"></i>
+                    <div class="w-11 h-11 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-500/20 shrink-0">
+                        <i class="fa-solid fa-mobile-screen text-xl"></i>
                     </div>
-                    <div class="text-left">
-                        <h3 class="font-bold text-gray-900 dark:text-white text-base">CareSync Mobile</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Single Flutter Codebase • Multi-Platform</p>
+                    <div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-base sm:text-lg leading-tight">CareSync Mobile Hub</h3>
+                        <p class="text-xs text-teal-600 dark:text-teal-400 font-medium">Native Flutter 3.x (Dart 3) • 60 FPS</p>
                     </div>
                 </div>
-                <button onclick="closeAppDownloadModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1">
+                <button onclick="closeAppDownloadModal()" aria-label="Close dialog" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <div class="py-6">
-                <!-- QR Code representation -->
-                <div class="w-40 h-40 mx-auto bg-gray-50 dark:bg-gray-900 rounded-xl p-3 border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-qrcode text-6xl text-teal-600 dark:text-teal-400"></i>
-                    <span class="text-[10px] text-gray-500 mt-2 font-mono">Scan on Phone</span>
-                </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 px-4">
-                    Open this site from your mobile browser for 1-click automatic installation, or download the Android APK below:
-                </p>
+            <div class="py-4 space-y-4 text-sm">
+                <!-- Option 1: Direct Android APK -->
+                <div class="bg-gray-50 dark:bg-gray-800/60 rounded-2xl p-4 border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider">
+                            <i class="fa-brands fa-android text-base text-teal-500"></i> Android Device (APK)
+                        </span>
+                        <span class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-600">v1.0.0 Release</span>
+                    </div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                        Install directly on any Android phone (Samsung, OnePlus, Xiaomi, Pixel, etc.). No Play Store account required.
+                    </p>
+                    
+                    <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases/download/v1.0.0/caresync-v1.0.0-release.apk" 
+                       class="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-teal-600/25 transition-all text-xs sm:text-sm active:scale-95 text-center">
+                        <i class="fa-solid fa-download"></i> Download Android APK (.apk)
+                    </a>
+                    
+                    <div class="mt-2.5 flex items-center justify-between text-[11px] text-gray-500 dark:text-gray-400 px-1">
+                        <span><i class="fa-solid fa-shield-halved text-teal-500 mr-1"></i> Safe & verified</span>
+                        <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases" target="_blank" class="text-teal-600 dark:text-teal-400 hover:underline">View GitHub Releases &rarr;</a>
+                    </div>
 
-                <div class="mt-4 flex justify-center gap-3">
-                    <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases" target="_blank" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all">
-                        <i class="fa-brands fa-android text-sm"></i> Download Android APK
-                    </a>
-                    <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/tree/main/caresync_mobile" target="_blank" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
-                        <i class="fa-solid fa-code text-sm"></i> View Source
-                    </a>
+                    <!-- Quick 3-Step Install Instruction -->
+                    <div class="mt-3 pt-3 border-t border-gray-200/60 dark:border-gray-700 text-[11px] text-gray-500 dark:text-gray-400 space-y-1">
+                        <p class="font-semibold text-gray-700 dark:text-gray-300">How to install in 30 seconds:</p>
+                        <p>1. Tap <strong>Download Android APK</strong> above.</p>
+                        <p>2. If Chrome asks <em>"File might be harmful"</em>, tap <strong>Download anyway</strong>.</p>
+                        <p>3. Tap the completed download notification and press <strong>Install</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Option 2: Instant Mobile Web App (PWA on iOS / Android) -->
+                <div class="bg-gray-50 dark:bg-gray-800/60 rounded-2xl p-4 border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
+                            <i class="fa-brands fa-apple text-base"></i> Instant App (iOS & Android)
+                        </span>
+                        <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full">0 MB Install</span>
+                    </div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300 mb-2">
+                        Add CareSync to your home screen right from your browser for a standalone, fullscreen native-style app:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 dark:text-gray-300">
+                        <div class="bg-white dark:bg-gray-700/60 p-2.5 rounded-xl border border-gray-200 dark:border-gray-600">
+                            <p class="font-bold text-[11px] text-blue-600 dark:text-blue-400 mb-1"><i class="fa-brands fa-apple mr-1"></i> iPhone (Safari)</p>
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400">Tap <i class="fa-solid fa-arrow-up-from-bracket text-blue-500"></i> Share button &rarr; tap <strong>Add to Home Screen</strong>.</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-700/60 p-2.5 rounded-xl border border-gray-200 dark:border-gray-600">
+                            <p class="font-bold text-[11px] text-teal-600 dark:text-teal-400 mb-1"><i class="fa-brands fa-chrome mr-1"></i> Android (Chrome)</p>
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400">Tap <strong>⋮</strong> menu &rarr; tap <strong>Add to Home screen</strong> or <strong>Install</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 3: Developer / Evaluator Source Code -->
+                <div class="bg-gray-50 dark:bg-gray-800/60 rounded-2xl p-4 border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                            <i class="fa-solid fa-code text-teal-500"></i> Run From Source (Flutter SDK)
+                        </span>
+                    </div>
+                    <div class="bg-gray-900 text-teal-300 p-2.5 rounded-xl font-mono text-[11px] overflow-x-auto flex items-center justify-between gap-2">
+                        <span class="truncate">cd caresync_mobile && flutter run</span>
+                        <button onclick="copyFlutterRunCommand()" title="Copy command" class="text-gray-400 hover:text-white p-1 rounded hover:bg-gray-800 shrink-0">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="mt-2.5 flex items-center justify-between text-xs">
+                        <button onclick="copyFlutterRunCommand()" class="text-teal-600 dark:text-teal-400 font-semibold hover:underline text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-copy"></i> Copy Clone & Run Command
+                        </button>
+                        <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/tree/main/caresync_mobile" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-teal-600 dark:hover:text-teal-400 font-semibold flex items-center gap-1 text-xs">
+                            <i class="fa-brands fa-github"></i> View Dart Code &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="pt-3 border-t border-gray-100 dark:border-gray-700">
-                <button onclick="closeAppDownloadModal()" class="w-full py-2 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 font-medium">Close</button>
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-end">
+                <button onclick="closeAppDownloadModal()" class="w-full py-2.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-colors">
+                    Close
+                </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sticky Quick-Action Bar (< 768px) -->
+    <div id="mobile-install-banner" class="fixed bottom-3 inset-x-3 z-30 md:hidden bg-gray-950/95 dark:bg-credCard/95 text-white backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl border border-gray-800 flex items-center justify-between transition-transform duration-300">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-teal-600 flex items-center justify-center text-white shrink-0 shadow-sm shadow-teal-500/30">
+                <i class="fa-solid fa-mobile-screen-button text-sm"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-white leading-tight">CareSync Mobile</p>
+                <p class="text-[10px] text-teal-400 font-medium">Native Flutter 3 • 60 FPS</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="openAppDownloadModal()" class="bg-teal-500 hover:bg-teal-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow active:scale-95 transition-all">
+                Get App
+            </button>
+            <button onclick="document.getElementById('mobile-install-banner').classList.add('hidden')" aria-label="Dismiss banner" class="text-gray-400 hover:text-white text-xs p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
     </div>
     

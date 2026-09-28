@@ -1,0 +1,83 @@
+name: Build & Release CareSync Mobile APK
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Build & Publish Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: |
+          cd caresync_mobile
+          flutter pub get
+
+      - name: Run Unit & Widget Tests
+        run: |
+          cd caresync_mobile
+          flutter test
+
+      - name: Build Android Release APK
+        run: |
+          cd caresync_mobile
+          flutter build apk --release
+
+      - name: Prepare Release Artifact
+        run: |
+          mkdir -p release-output
+          cp caresync_mobile/build/app/outputs/flutter-apk/app-release.apk release-output/caresync-v1.0.0-release.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: caresync-v1.0.0-release.apk
+          path: release-output/caresync-v1.0.0-release.apk
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: CareSync Mobile v1.0.0 (Release)
+          body: |
+            ## 📱 CareSync Mobile v1.0.0 — Production Release
+
+            Native Flutter healthcare application connecting Patients, Doctors, and Hospital Admins with real-time appointment scheduling, clinical consultations, and resource tracking.
+
+            ### 🚀 Features:
+            - **Pixel-Perfect Material 3 UI**: Clean architecture with smooth 60 FPS transitions and Inter typography.
+            - **Multi-Role Workflows**: Patient appointment booking, Doctor clinical consultations, Admin hospital resource management.
+            - **Transparent Billing**: Zero hidden fees with real-time itemized cost ledgers.
+            - **Offline Resilience**: Instant session recovery via SharedPreferences and non-blocking asynchronous event loop.
+
+            ### 📲 How to Install:
+            1. Download the `caresync-v1.0.0-release.apk` attached below directly to your Android device.
+            2. Open the downloaded file and tap **Install** (allow *Install Unknown Apps* if prompted).
+            3. Open CareSync and sign in or use one-tap Guest Logins!
+          files: release-output/caresync-v1.0.0-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
