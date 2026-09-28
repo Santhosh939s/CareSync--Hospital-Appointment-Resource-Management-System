@@ -193,17 +193,17 @@ flutter run
 
 ---
 
-## 💎 Direct Alignment with CRED Mobile Intern (Flutter) Role
+## 💎 Production Engineering Standards & Architecture Implementation
 
-This project was built from the ground up to demonstrate mastery of the core competencies defined in **CRED's Mobile Intern (Flutter) Job Description**:
+This project was built from the ground up according to high-standard mobile engineering benchmarks:
 
-| CRED JD Requirement | CareSync Mobile Implementation & Technical Proof |
+| Engineering Standard | CareSync Mobile Implementation & Technical Proof |
 | :--- | :--- |
-| **Work on a disruptive product** | Built an end-to-end, multi-role hospital ecosystem (Patient, Doctor, Admin) solving resource bottlenecks, eliminating fake queues, and providing transparent healthcare ledgers. |
-| **Pixel-perfect implementation of designs** | Custom Material 3 theme (`AppTheme`), refined dark mode (`#0D1117` & `#161B22`), custom color tokens, bespoke typography, smooth 60 FPS transitions, custom badges (`StatusBadge`), and micro-interactions. |
-| **Extensive knowledge of Flutter (coding to publishing)** | Sound null safety (Dart 3), layered Clean Architecture, release build optimization, Android manifest configurations, vector icons, custom splash screen, and cross-platform readiness. |
-| **In-depth understanding of Flutter concepts** | Separation of concerns across the 3 Flutter trees (Widget, Element, RenderObject), state management with Provider (`InheritedWidget` wrapper), lifecycle hooks, and avoidance of unnecessary rebuilds via `Consumer` & `Selector`. |
-| **Proficient with RESTful APIs** | Centralized `ApiClient` with timeout management, robust error mapping (`ApiException`, `NetworkException`), typed JSON serialization, and dynamic environment baseUrl (`--dart-define`). |
+| **Complex Domain Modeling** | Built an end-to-end, multi-role hospital ecosystem (Patient, Doctor, Admin) solving resource bottlenecks, eliminating overbooking with pre-flight checks, and providing transparent healthcare ledgers. |
+| **Pixel-Perfect Craft & Design** | Custom Material 3 theme (`AppTheme`), refined dark mode (`#0D1117` & `#161B22`), custom color tokens, bespoke typography, smooth 60 FPS transitions, custom badges (`StatusBadge`), and micro-interactions. |
+| **Production-Ready Flutter Architecture** | Sound null safety (Dart 3), layered Clean Architecture, release build optimization, Android manifest configurations, vector icons, custom splash screen, and cross-platform readiness. |
+| **In-Depth Flutter Concepts** | Separation of concerns across the 3 Flutter trees (Widget, Element, RenderObject), state management with Provider (`InheritedWidget` wrapper), lifecycle hooks, and avoidance of unnecessary rebuilds via `Consumer` & `Selector`. |
+| **Robust RESTful API Integration** | Centralized `ApiClient` with timeout management, robust error mapping (`ApiException`, `NetworkException`), typed JSON serialization, and dynamic environment baseUrl (`--dart-define`). |
 | **Storage, Threading & Performance Tuning** | **Storage**: `SharedPreferences` for session restoration & theme caching.<br>**Threading**: Non-blocking asynchronous event loop, microtask management, and isolate readiness.<br>**Performance**: Eliminated battery-draining polling, implemented viewport virtualization (`ListView.builder`), and applied `const` constructors aggressively. |
-| **Agile & Self-Starter Team Player** | Modular, decoupled codebase with complete test coverage (Unit & Widget), comprehensive architecture documentation, and production-style Git history. |
+| **Test-Driven & Maintainable Code** | Modular, decoupled codebase with complete test coverage (Unit & Widget), comprehensive architecture documentation, and production-style Git history. |
 
