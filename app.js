@@ -1023,7 +1023,7 @@ async function saveResourceInventory() {
     }
 }
 
-// --- DARK MODE LOGIC (SAP Fiori Horizon) ---
+// --- THEME ENGINE (CRED-Inspired Dark / Light Mode) ---
 function toggleDarkMode() {
     const html = document.documentElement;
     const body = document.body;
@@ -1033,17 +1033,18 @@ function toggleDarkMode() {
     if (body.classList.contains('dark')) {
         body.classList.remove('dark');
         icon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('sap_theme', 'light');
+        localStorage.setItem('caresync_theme', 'light');
     } else {
         body.classList.add('dark');
         icon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('sap_theme', 'dark');
+        localStorage.setItem('caresync_theme', 'dark');
     }
 }
 
 // Check saved theme on load
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('sap_theme') === 'dark') {
+    const savedTheme = localStorage.getItem('caresync_theme');
+    if (savedTheme === 'dark') {
         document.body.classList.add('dark');
         const icon = document.getElementById('theme-icon');
         if(icon) icon.classList.replace('fa-moon', 'fa-sun');

@@ -32,6 +32,6 @@ class AppConstants {
 
   /// Local storage keys
   static const String keyUser = 'hms_currentUser';
-  static const String keyThemeMode = 'sap_theme';
+  static const String keyThemeMode = 'caresync_theme';
   static const String keySeenUpdates = 'hms_seen_updates';
 }

@@ -1,4 +1,4 @@
-/// Financial ledger entry for CareSync billing (FI/CO).
+/// Financial ledger entry for CareSync transparent billing ledger.
 ///
 /// Maps to the FinancialLedger collection in MongoDB.
 class FinancialLedger {

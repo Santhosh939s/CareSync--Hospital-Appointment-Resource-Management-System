@@ -251,7 +251,7 @@ app.put('/api/appointments/:id', async (req, res) => {
             await resourceDoc.save();
         }
         
-        // FI/CO: Generate generic consultation charge upon completion
+        // Transparent Billing: Generate consultation charge upon completion
         if (status === 'Completed' && !isUpdated) {
             await new FinancialLedger({ docId: 'FI'+Date.now()+'c', patientId, type: 'Consultation Fee', amount: 200, date: today, status: 'Posted' }).save();
         }
