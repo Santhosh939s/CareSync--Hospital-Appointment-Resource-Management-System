@@ -323,12 +323,13 @@ app.put('/api/resources', async (req, res) => {
 // Direct APK Download Endpoints
 app.get(['/download-apk', '/downloads/caresync.apk', '/downloads/CareSync.apk', '/api/download-apk'], (req, res) => {
     const apkPath = path.join(__dirname, 'downloads', 'caresync.apk');
-    if (fs.existsSync(apkPath)) {
+    if (fs.existsSync(apkPath) && fs.statSync(apkPath).size > 1000000) {
         res.setHeader('Content-Type', 'application/vnd.android.package-archive');
         res.setHeader('Content-Disposition', 'attachment; filename="CareSync.apk"');
         res.sendFile(apkPath);
     } else {
-        res.status(404).json({ error: "APK file not found" });
+        // Direct stream redirect to authentic compiled release APK
+        res.redirect(302, 'https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases/download/v1.0.0/caresync-v1.0.0-release.apk');
     }
 });
 
