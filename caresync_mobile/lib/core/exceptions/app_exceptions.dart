@@ -13,6 +13,13 @@ class AppException implements Exception {
   String toString() => message;
 }
 
+/// Generic API Exception used by service layer.
+class ApiException extends AppException {
+  final int? code;
+  const ApiException({required String message, this.code, int? statusCode})
+      : super(message, statusCode: statusCode ?? code);
+}
+
 /// Thrown when the device has no network connectivity.
 class NetworkException extends AppException {
   const NetworkException([String message = 'No internet connection. Please check your network.'])

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/user.dart';
 import '../constants/app_constants.dart';
 
 /// Thin wrapper around [SharedPreferences] for CareSync local persistence.
@@ -9,7 +10,18 @@ import '../constants/app_constants.dart';
 /// Stores non-sensitive session metadata, theme preference and notification state.
 /// Never stores raw passwords or MongoDB credentials.
 class LocalStorage {
+  static User? _cachedUser;
   SharedPreferences? _prefs;
+
+  static Future<void> init() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(AppConstants.keyUser);
+    if (raw != null) {
+      try {
+        _cachedUser = User.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      } catch (_) {}
+    }
+  }
 
   Future<SharedPreferences> get _instance async {
     _prefs ??= await SharedPreferences.getInstance();
@@ -18,25 +30,33 @@ class LocalStorage {
 
   // ── Auth Session ──────────────────────────────────────────────────────
 
-  /// Saves the user JSON (without password) for session restoration.
-  Future<void> saveUser(Map<String, dynamic> user) async {
+  /// Saves the user (without password) for session restoration.
+  Future<void> saveUser(dynamic user) async {
     final prefs = await _instance;
-    await prefs.setString(AppConstants.keyUser, jsonEncode(user));
+    if (user is User) {
+      _cachedUser = user;
+      await prefs.setString(AppConstants.keyUser, jsonEncode(user.toJson()));
+    } else if (user is Map<String, dynamic>) {
+      _cachedUser = User.fromJson(user);
+      await prefs.setString(AppConstants.keyUser, jsonEncode(user));
+    }
   }
 
-  /// Returns the stored user JSON or null if no session exists.
-  Future<Map<String, dynamic>?> getUser() async {
-    final prefs = await _instance;
-    final raw = prefs.getString(AppConstants.keyUser);
-    if (raw == null) return null;
-    return jsonDecode(raw) as Map<String, dynamic>;
-  }
+  /// Returns the cached user or null if no session exists.
+  User? getUser() => _cachedUser;
 
   /// Clears the stored session.
   Future<void> clearUser() async {
+    _cachedUser = null;
     final prefs = await _instance;
     await prefs.remove(AppConstants.keyUser);
   }
+
+  /// Alias for clearing authentication session.
+  Future<void> clearSession() => clearUser();
+
+  /// Marks a prescription update as viewed.
+  Future<void> markPrescriptionViewed(String key) => markUpdateSeen(key);
 
   // ── Theme ─────────────────────────────────────────────────────────────
 

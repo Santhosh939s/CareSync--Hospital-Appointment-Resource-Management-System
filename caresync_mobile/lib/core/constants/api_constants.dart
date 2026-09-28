@@ -10,13 +10,16 @@ class ApiConstants {
   // Auth
   static const String login = '/login';
   static const String register = '/users';
+  static const String users = '/users';
   static const String guestLogin = '/guest-login';
 
   // Data
   static const String allData = '/data';
+  static const String data = '/data';
 
   // Appointments
   static const String appointments = '/appointments';
+  static String appointmentById(String id) => '$appointments/$id';
 
   // Scans
   static const String scans = '/scans';
