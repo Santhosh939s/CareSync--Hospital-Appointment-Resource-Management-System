@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:caresync_mobile/app/theme.dart';
 import 'package:caresync_mobile/providers/auth_provider.dart';
 import 'package:caresync_mobile/screens/auth/login_screen.dart';
 
 void main() {
+  setUp(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('LoginScreen renders credentials form and demo chips', (WidgetTester tester) async {
     await tester.pumpWidget(
       MultiProvider(
