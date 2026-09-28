@@ -588,6 +588,21 @@
         }
 
         function openAppDownloadModal() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Direct download if user is on an Android device
+            if (/android/i.test(userAgent)) {
+                window.open('https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases', '_blank');
+                return;
+            }
+
+            // Direct link if user is on iOS (iPhone / iPad)
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.open('https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System#readme', '_blank');
+                return;
+            }
+
+            // If on Desktop/Laptop, display the smart download modal
             document.getElementById('app-download-modal').classList.remove('hidden');
         }
 
@@ -596,68 +611,46 @@
         }
     </script>
     
-    <!-- Mobile App Download Modal -->
+    <!-- Mobile App Download Modal (Desktop Visitors) -->
     <div id="app-download-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 border border-gray-100 dark:border-gray-700 transform transition-all">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 border border-gray-100 dark:border-gray-700 transform transition-all text-center">
             <div class="flex justify-between items-center pb-4 border-b border-gray-100 dark:border-gray-700">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white">
-                        <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+                        <i class="fa-solid fa-mobile-screen text-lg"></i>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 dark:text-white text-lg">CareSync Mobile</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Available for Android & iOS</p>
+                    <div class="text-left">
+                        <h3 class="font-bold text-gray-900 dark:text-white text-base">CareSync Mobile</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Single Flutter Codebase • Multi-Platform</p>
                     </div>
                 </div>
                 <button onclick="closeAppDownloadModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-            <div class="py-5 space-y-3">
-                <!-- Android APK Download -->
-                <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases" target="_blank" class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center text-lg">
-                            <i class="fa-brands fa-android"></i>
-                        </div>
-                        <div class="text-left">
-                            <div class="font-semibold text-sm text-gray-800 dark:text-gray-200 group-hover:text-teal-600">Android APK</div>
-                            <div class="text-xs text-gray-500">Download direct .apk package</div>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-download text-gray-400 group-hover:text-teal-600"></i>
-                </a>
 
-                <!-- iOS / TestFlight -->
-                <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System#readme" target="_blank" class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 flex items-center justify-center text-lg">
-                            <i class="fa-brands fa-apple"></i>
-                        </div>
-                        <div class="text-left">
-                            <div class="font-semibold text-sm text-gray-800 dark:text-gray-200 group-hover:text-teal-600">iOS (Apple)</div>
-                            <div class="text-xs text-gray-500">Build with Flutter iOS / TestFlight</div>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-gray-400 group-hover:text-teal-600"></i>
-                </a>
+            <div class="py-6">
+                <!-- QR Code representation -->
+                <div class="w-40 h-40 mx-auto bg-gray-50 dark:bg-gray-900 rounded-xl p-3 border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-qrcode text-6xl text-teal-600 dark:text-teal-400"></i>
+                    <span class="text-[10px] text-gray-500 mt-2 font-mono">Scan on Phone</span>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 px-4">
+                    Open this site from your mobile browser for 1-click automatic installation, or download the Android APK below:
+                </p>
 
-                <!-- Flutter Source Code -->
-                <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/tree/main/caresync_mobile" target="_blank" class="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <div class="text-left">
-                            <div class="font-semibold text-sm text-gray-800 dark:text-gray-200 group-hover:text-teal-600">Flutter Source Code</div>
-                            <div class="text-xs text-gray-500">Browse Dart & Material 3 repository</div>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-gray-400 group-hover:text-teal-600"></i>
-                </a>
+                <div class="mt-4 flex justify-center gap-3">
+                    <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/releases" target="_blank" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all">
+                        <i class="fa-brands fa-android text-sm"></i> Download Android APK
+                    </a>
+                    <a href="https://github.com/Santhosh939s/CareSync--Hospital-Appointment-Resource-Management-System/tree/main/caresync_mobile" target="_blank" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+                        <i class="fa-solid fa-code text-sm"></i> View Source
+                    </a>
+                </div>
             </div>
-            <div class="pt-3 border-t border-gray-100 dark:border-gray-700 text-center">
-                <button onclick="closeAppDownloadModal()" class="w-full py-2 text-sm text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Close</button>
+
+            <div class="pt-3 border-t border-gray-100 dark:border-gray-700">
+                <button onclick="closeAppDownloadModal()" class="w-full py-2 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 font-medium">Close</button>
             </div>
         </div>
     </div>
