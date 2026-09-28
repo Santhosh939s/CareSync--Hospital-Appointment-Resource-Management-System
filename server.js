@@ -54,6 +54,25 @@ app.get('/api/data', async (req, res) => {
     }
 });
 
+// POST for email/password login (used by Flutter mobile app)
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ success: false, error: 'Email and password are required' });
+    }
+    try {
+        const user = await User.findOne({ email, password }).lean();
+        if (!user) {
+            return res.status(401).json({ success: false, error: 'Invalid email or password' });
+        }
+        // Strip password before sending to client
+        delete user.password;
+        res.json({ success: true, user });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 // POST to register a new user
 app.post('/api/users', async (req, res) => {
     try {
@@ -216,4 +235,8 @@ app.put('/api/resources', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on port ${PORT}`));
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on port ${PORT}`));
+}
+
+module.exports = app;
