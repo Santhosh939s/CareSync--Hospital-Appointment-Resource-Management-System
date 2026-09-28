@@ -55,9 +55,15 @@ jobs:
         run: |
           cd caresync_mobile
           flutter build apk --debug --verbose > ../build.log 2>&1 || {
-            echo "=== FLUTTER BUILD FAILED ==="
-            tail -n 150 ../build.log
-            tail -n 150 ../build.log > ../build_error_details.txt
+            echo "=== FLUTTER ASSEMBLE ERRORS ==="
+            grep -B 5 -A 25 "compileFlutterBuild" ../build.log || true
+            grep -B 2 -A 10 "Target .* failed" ../build.log || true
+            grep -B 2 -A 10 "Error:" ../build.log || true
+            {
+              grep -B 5 -A 25 "compileFlutterBuild" ../build.log || true
+              grep -B 2 -A 10 "Target .* failed" ../build.log || true
+              grep -B 2 -A 10 "Error:" ../build.log || true
+            } > ../build_error_details.txt
             exit 1
           }
           ls -la build/app/outputs/flutter-apk/
