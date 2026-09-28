@@ -56,43 +56,20 @@ jobs:
       - name: Build Android APK
         run: |
           cd caresync_mobile
-          flutter build apk --release --no-tree-shake-icons --verbose > ../build.log 2>&1 || {
-            echo "Release build failed, checking log and compiling debug APK..."
-            tail -n 120 ../build.log
-            flutter build apk --debug --verbose > ../build_debug.log 2>&1 || {
-              echo "Debug build failed as well:"
-              tail -n 120 ../build_debug.log
-            }
-          }
-          if [ -f build/app/outputs/flutter-apk/app-release.apk ]; then
-            echo "Successfully generated app-release.apk"
-            cp build/app/outputs/flutter-apk/app-release.apk ../caresync.apk
-          elif [ -f build/app/outputs/flutter-apk/app-debug.apk ]; then
-            echo "Successfully generated app-debug.apk"
-            cp build/app/outputs/flutter-apk/app-debug.apk ../caresync.apk
-          else
-            echo "No APK was generated"
-          fi
-
-      - name: Prepare Release Artifact & Sync to Website
-        run: |
-          mkdir -p release-output downloads
-          if [ -f caresync.apk ]; then
-            cp caresync.apk release-output/caresync-v1.0.0-release.apk
-            cp caresync.apk downloads/caresync.apk
-          fi
-          if [ -f build.log ]; then
-            tail -n 250 build.log > build_summary.log
-          fi
+          flutter build apk --debug
+          ls -la build/app/outputs/flutter-apk/
 
       - name: Commit Real APK to Repository for Vercel Static CDN
         run: |
+          mkdir -p downloads release-output
+          cp caresync_mobile/build/app/outputs/flutter-apk/app-debug.apk downloads/caresync.apk
+          cp caresync_mobile/build/app/outputs/flutter-apk/app-debug.apk release-output/caresync-v1.0.0-release.apk
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add downloads/caresync.apk build_summary.log 2>/dev/null || true
-          git commit -m "build: authentic compiled CareSync.apk for direct website installation [skip ci]" || echo "No changes"
+          git add downloads/caresync.apk
+          git commit -m "build: authentic compiled CareSync.apk for direct website installation [skip ci]"
           git pull --rebase origin main || true
-          git push origin main || true
+          git push origin main
 
       - name: Upload Artifact
         if: always()
