@@ -50,10 +50,13 @@ jobs:
           cd caresync_mobile
           flutter test || echo "Tests completed with warnings, continuing build"
 
+      - name: Accept Android Licenses
+        run: yes | flutter doctor --android-licenses || true
+
       - name: Build Android Release APK
         run: |
           cd caresync_mobile
-          flutter build apk --release --no-tree-shake-icons
+          flutter build apk --release --no-tree-shake-icons --verbose
 
       - name: Prepare Release Artifact
         run: |
@@ -68,6 +71,7 @@ jobs:
           cp caresync_mobile/build/app/outputs/flutter-apk/app-release.apk downloads/caresync.apk
           git add downloads/caresync.apk
           git commit -m "build: genuine Flutter production APK for direct website download [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin main || true
           git push origin main
 
       - name: Upload Artifact
