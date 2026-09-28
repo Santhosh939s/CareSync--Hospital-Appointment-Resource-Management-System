@@ -5,7 +5,7 @@
       "src": "server.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["database.sample.json", "database.json"]
+        "includeFiles": ["database.sample.json", "database.json", "downloads/**"]
       }
     },
     {
@@ -19,9 +19,25 @@
     {
       "src": "app.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "downloads/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/downloads/(.*)",
+      "headers": {
+        "Content-Type": "application/vnd.android.package-archive",
+        "Content-Disposition": "attachment; filename=\"CareSync.apk\""
+      },
+      "dest": "/downloads/$1"
+    },
+    {
+      "src": "/download-apk",
+      "dest": "/server.js"
+    },
     {
       "src": "/api/(.*)",
       "dest": "/server.js"

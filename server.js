@@ -320,6 +320,18 @@ app.put('/api/resources', async (req, res) => {
     }
 });
 
+// Direct APK Download Endpoints
+app.get(['/download-apk', '/downloads/caresync.apk', '/downloads/CareSync.apk', '/api/download-apk'], (req, res) => {
+    const apkPath = path.join(__dirname, 'downloads', 'caresync.apk');
+    if (fs.existsSync(apkPath)) {
+        res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+        res.setHeader('Content-Disposition', 'attachment; filename="CareSync.apk"');
+        res.sendFile(apkPath);
+    } else {
+        res.status(404).json({ error: "APK file not found" });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 if (!process.env.VERCEL) {
     app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on port ${PORT}`));
