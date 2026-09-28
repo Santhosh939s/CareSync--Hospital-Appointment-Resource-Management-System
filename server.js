@@ -333,6 +333,19 @@ app.get(['/download-apk', '/downloads/caresync.apk', '/downloads/CareSync.apk', 
     }
 });
 
+// In-App Version & OTA Update Check Endpoint
+app.get('/api/app-version', (req, res) => {
+    res.json({
+        latestVersion: "1.0.0",
+        versionCode: 1,
+        minSupportedVersion: "1.0.0",
+        downloadUrl: "https://care-sync-hospital-appointment-reso.vercel.app/download-apk",
+        releaseNotes: "Optimized production release with 85% reduced APK size, dark mode UI, and doctor consultation features.",
+        forceUpdate: false,
+        publishedAt: new Date().toISOString()
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 if (!process.env.VERCEL) {
     app.listen(PORT, () => console.log(`CareSync Backend Server is actively running on port ${PORT}`));

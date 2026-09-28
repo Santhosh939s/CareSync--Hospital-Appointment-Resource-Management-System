@@ -12,6 +12,7 @@ import '../../widgets/app_card.dart';
 import '../../widgets/appointment_card.dart';
 import '../../widgets/dashboard_metric_card.dart';
 import '../../widgets/empty_view.dart';
+import '../../services/app_update_service.dart';
 import '../../widgets/loading_view.dart';
 
 /// Doctor home dashboard showing today's queue, KPI metrics, and clinical actions.
@@ -26,9 +27,14 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final user = context.read<AuthProvider>().currentUser;
-      context.read<AppointmentProvider>().loadData(user);
+      await context.read<AppointmentProvider>().loadData(user);
+      if (!mounted) return;
+      final updateInfo = await AppUpdateService().checkForUpdate();
+      if (mounted && updateInfo != null && updateInfo.hasUpdate) {
+        AppUpdateService.showUpdatePrompt(context, updateInfo);
+      }
     });
   }
 

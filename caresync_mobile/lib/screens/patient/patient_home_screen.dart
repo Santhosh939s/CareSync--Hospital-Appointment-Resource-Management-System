@@ -12,6 +12,7 @@ import '../../widgets/bottom_navigation.dart';
 import '../../widgets/empty_view.dart';
 import '../../widgets/error_view.dart';
 import '../../widgets/loading_view.dart';
+import '../../services/app_update_service.dart';
 import 'appointments_screen.dart';
 import 'prescriptions_screen.dart';
 import '../profile/profile_screen.dart';
@@ -38,6 +39,11 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
   Future<void> _loadData() async {
     final user = context.read<AuthProvider>().currentUser;
     await context.read<AppointmentProvider>().loadData(user);
+    if (!mounted) return;
+    final updateInfo = await AppUpdateService().checkForUpdate();
+    if (mounted && updateInfo != null && updateInfo.hasUpdate) {
+      AppUpdateService.showUpdatePrompt(context, updateInfo);
+    }
   }
 
   @override

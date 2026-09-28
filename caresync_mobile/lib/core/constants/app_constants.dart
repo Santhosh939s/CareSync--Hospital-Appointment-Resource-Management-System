@@ -40,4 +40,8 @@ class AppConstants {
   static const String keyUser = 'hms_currentUser';
   static const String keyThemeMode = 'caresync_theme';
   static const String keySeenUpdates = 'hms_seen_updates';
+
+  /// App Version Metadata
+  static const String appVersion = '1.0.0';
+  static const int appBuildNumber = 1;
 }

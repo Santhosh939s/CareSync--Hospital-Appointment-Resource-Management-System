@@ -26,4 +26,7 @@ class ApiConstants {
 
   // Resources
   static const String resources = '/resources';
+
+  // App Version & In-App Updates
+  static const String appVersion = '/app-version';
 }
