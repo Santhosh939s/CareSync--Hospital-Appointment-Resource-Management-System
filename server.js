@@ -11,15 +11,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname)); // Serve frontend files
 
-const fs = require('fs');
+let localDataCached = null;
+try {
+    localDataCached = require('./database.json');
+} catch (e) {
+    try {
+        const fs = require('fs');
+        localDataCached = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json'), 'utf8'));
+    } catch (_) {
+        localDataCached = { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
+    }
+}
 
 function loadLocalData() {
-    try {
-        const raw = fs.readFileSync(path.join(__dirname, 'database.json'), 'utf8');
-        return JSON.parse(raw);
-    } catch (e) {
-        return { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
-    }
+    return localDataCached || { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
 }
 
 // Connect to MongoDB Atlas (if URI provided)
