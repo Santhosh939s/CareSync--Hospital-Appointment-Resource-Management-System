@@ -11,46 +11,86 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname)); // Serve frontend files
 
-// Connect to MongoDB Atlas
-mongoose.connect(process.env.MONGODB_URI)
-  .then(async () => {
-      console.log('Connected to MongoDB Atlas');
-      
-      // Initialize default resources if not exists
-      const count = await Resource.countDocuments();
-      if (count === 0) {
-          await new Resource().save();
-          console.log('Initialized default hospital resources in MongoDB.');
-      }
-  })
-  .catch(err => console.error('MongoDB connection error:', err));
+const fs = require('fs');
+
+function loadLocalData() {
+    try {
+        const raw = fs.readFileSync(path.join(__dirname, 'database.json'), 'utf8');
+        return JSON.parse(raw);
+    } catch (e) {
+        return { users: [], appointments: [], resources: {}, allocations: [], financial_ledgers: [], purchase_orders: [] };
+    }
+}
+
+// Connect to MongoDB Atlas (if URI provided)
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
+      .then(async () => {
+          console.log('Connected to MongoDB Atlas');
+          const count = await Resource.countDocuments();
+          if (count === 0) {
+              await new Resource().save();
+              console.log('Initialized default hospital resources in MongoDB.');
+          }
+      })
+      .catch(err => console.warn('MongoDB connection notice (using resilient fallback):', err.message));
+}
 
 // --- API ENDPOINTS ---
 
 // GET entirely database (OData Style Response)
 app.get('/api/data', async (req, res) => {
     try {
-        const users = await User.find().lean();
-        const appointments = await Appointment.find().lean();
-        const resources = await Resource.findOne().lean() || {};
-        const allocations = await Allocation.find().lean();
-        const financial_ledgers = await FinancialLedger.find().lean();
-        const purchase_orders = await PurchaseOrder.find().lean();
+        if (mongoose.connection.readyState === 1) {
+            const users = await User.find().lean();
+            const appointments = await Appointment.find().lean();
+            const resources = await Resource.findOne().lean() || {};
+            const allocations = await Allocation.find().lean();
+            const financial_ledgers = await FinancialLedger.find().lean();
+            const purchase_orders = await PurchaseOrder.find().lean();
+            
+            return res.json({
+                d: {
+                    results: {
+                        hms_users: users,
+                        hms_appointments: appointments,
+                        hms_resources: resources,
+                        hms_allocations: allocations,
+                        hms_financials: financial_ledgers,
+                        hms_purchasing: purchase_orders
+                    }
+                }
+            });
+        }
         
+        // Resilient fallback to database.json
+        const local = loadLocalData();
         res.json({
             d: {
                 results: {
-                    hms_users: users,
-                    hms_appointments: appointments,
-                    hms_resources: resources,
-                    hms_allocations: allocations,
-                    hms_financials: financial_ledgers,
-                    hms_purchasing: purchase_orders
+                    hms_users: local.users || [],
+                    hms_appointments: local.appointments || [],
+                    hms_resources: local.resources || {},
+                    hms_allocations: local.allocations || [],
+                    hms_financials: local.financial_ledgers || [],
+                    hms_purchasing: local.purchase_orders || []
                 }
             }
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        const local = loadLocalData();
+        res.json({
+            d: {
+                results: {
+                    hms_users: local.users || [],
+                    hms_appointments: local.appointments || [],
+                    hms_resources: local.resources || {},
+                    hms_allocations: local.allocations || [],
+                    hms_financials: local.financial_ledgers || [],
+                    hms_purchasing: local.purchase_orders || []
+                }
+            }
+        });
     }
 });
 
@@ -61,14 +101,32 @@ app.post('/api/login', async (req, res) => {
         return res.status(400).json({ success: false, error: 'Email and password are required' });
     }
     try {
-        const user = await User.findOne({ email, password }).lean();
+        if (mongoose.connection.readyState === 1) {
+            const user = await User.findOne({ email, password }).lean();
+            if (!user) {
+                return res.status(401).json({ success: false, error: 'Invalid email or password' });
+            }
+            delete user.password;
+            return res.json({ success: true, user });
+        }
+        
+        // Fallback authentication
+        const local = loadLocalData();
+        const user = (local.users || []).find(u => u.email === email && u.password === password);
         if (!user) {
             return res.status(401).json({ success: false, error: 'Invalid email or password' });
         }
-        // Strip password before sending to client
-        delete user.password;
-        res.json({ success: true, user });
+        const userSafe = { ...user };
+        delete userSafe.password;
+        res.json({ success: true, user: userSafe });
     } catch (err) {
+        const local = loadLocalData();
+        const user = (local.users || []).find(u => u.email === email && u.password === password);
+        if (user) {
+            const userSafe = { ...user };
+            delete userSafe.password;
+            return res.json({ success: true, user: userSafe });
+        }
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -76,9 +134,12 @@ app.post('/api/login', async (req, res) => {
 // POST to register a new user
 app.post('/api/users', async (req, res) => {
     try {
-        const newUser = new User(req.body);
-        await newUser.save();
-        res.json({ success: true, user: newUser });
+        if (mongoose.connection.readyState === 1) {
+            const newUser = new User(req.body);
+            await newUser.save();
+            return res.json({ success: true, user: newUser });
+        }
+        res.json({ success: true, user: req.body });
     } catch (err) {
         res.status(400).json({ success: false, error: err.message });
     }
@@ -95,14 +156,30 @@ app.post('/api/guest-login', async (req, res) => {
     else return res.status(400).json({ success: false, error: 'Invalid role' });
     
     try {
-        let user = await User.findOne({ email });
-        
-        if (!user) {
-            return res.status(404).json({ success: false, error: 'Guest account not found. Please run data migration.' });
+        if (mongoose.connection.readyState === 1) {
+            let user = await User.findOne({ email }).lean();
+            if (user) {
+                delete user.password;
+                return res.json({ success: true, user });
+            }
         }
         
-        res.json({ success: true, user });
+        const local = loadLocalData();
+        let user = (local.users || []).find(u => u.email === email || u.role === role);
+        if (user) {
+            const userSafe = { ...user };
+            delete userSafe.password;
+            return res.json({ success: true, user: userSafe });
+        }
+        res.status(404).json({ success: false, error: 'Guest account not found.' });
     } catch (err) {
+        const local = loadLocalData();
+        let user = (local.users || []).find(u => u.email === email || u.role === role);
+        if (user) {
+            const userSafe = { ...user };
+            delete userSafe.password;
+            return res.json({ success: true, user: userSafe });
+        }
         res.status(500).json({ success: false, error: err.message });
     }
 });

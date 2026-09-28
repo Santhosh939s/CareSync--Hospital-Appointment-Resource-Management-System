@@ -1,5 +1,5 @@
-// Automatically route to local backend if running locally, otherwise use the live Render backend
-const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+// Automatically route to local backend or Vercel serverless backend, otherwise use Render backend
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.endsWith('vercel.app');
 const API_URL = isLocalhost 
     ? '/api' 
     : 'https://hospital-appointment-and-resource.onrender.com/api';
