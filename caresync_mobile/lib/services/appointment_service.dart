@@ -79,7 +79,7 @@ class AppointmentService {
 
     if (currentCount >= AppConstants.maxPatientsPerSlot) {
       throw const ValidationException(
-        message: 'This time slot is now fully booked (maximum 3 patients reached). Please select another slot.',
+        'This time slot is now fully booked (maximum 3 patients reached). Please select another slot.',
       );
     }
 
@@ -93,7 +93,7 @@ class AppointmentService {
 
     if (hasDuplicate) {
       throw const ValidationException(
-        message: 'You already have an appointment scheduled at this time.',
+        'You already have an appointment scheduled at this time.',
       );
     }
 

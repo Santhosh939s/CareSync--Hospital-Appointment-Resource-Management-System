@@ -34,7 +34,7 @@ class AuthenticationException extends AppException {
 
 /// Thrown when the server returns 400 or input validation fails.
 class ValidationException extends AppException {
-  const ValidationException(super.message) : super(statusCode: 400);
+  const ValidationException([super.message = 'Validation failed.']) : super(statusCode: 400);
 }
 
 /// Thrown when the server returns 404.

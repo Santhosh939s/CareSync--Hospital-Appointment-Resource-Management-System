@@ -76,8 +76,8 @@ class _ConsultationScreenState extends State<ConsultationScreen> {
           content: Text(
             'Prescription filed successfully for patient ${widget.appointment.patientId}.\n\n'
             'Backend business logic executed:\n'
-            '• Consultation fee ($200) ledger logged\n'
-            '${_admitBed ? '• Hospital bed allocated ($500)\n' : ''}'
+            '• Consultation fee (\$200) ledger logged\n'
+            '${_admitBed ? '• Hospital bed allocated (\$500)\n' : ''}'
             '${_needBlood ? '• $_bloodUnits units ($_bloodType) deducted and allocated\n' : ''}'
             '${_scanRequired != 'None' ? '• Prescribed diagnostic scan: $_scanRequired\n' : ''}',
           ),

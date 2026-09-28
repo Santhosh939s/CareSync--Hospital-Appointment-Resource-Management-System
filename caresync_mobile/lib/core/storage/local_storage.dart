@@ -11,6 +11,7 @@ import '../constants/app_constants.dart';
 /// Never stores raw passwords or MongoDB credentials.
 class LocalStorage {
   static User? _cachedUser;
+  static final Set<String> _viewedPrescriptions = {};
   SharedPreferences? _prefs;
 
   static Future<void> init() async {
@@ -19,6 +20,13 @@ class LocalStorage {
     if (raw != null) {
       try {
         _cachedUser = User.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      } catch (_) {}
+    }
+    final rawUpdates = prefs.getString(AppConstants.keySeenUpdates);
+    if (rawUpdates != null) {
+      try {
+        final list = List<String>.from(jsonDecode(rawUpdates) as List);
+        _viewedPrescriptions.addAll(list);
       } catch (_) {}
     }
   }
@@ -55,8 +63,14 @@ class LocalStorage {
   /// Alias for clearing authentication session.
   Future<void> clearSession() => clearUser();
 
+  /// Returns cached list of viewed prescription IDs.
+  List<String> getViewedPrescriptionIds() => _viewedPrescriptions.toList();
+
   /// Marks a prescription update as viewed.
-  Future<void> markPrescriptionViewed(String key) => markUpdateSeen(key);
+  Future<void> markPrescriptionViewed(String key) async {
+    _viewedPrescriptions.add(key);
+    await markUpdateSeen(key);
+  }
 
   // ── Theme ─────────────────────────────────────────────────────────────
 
