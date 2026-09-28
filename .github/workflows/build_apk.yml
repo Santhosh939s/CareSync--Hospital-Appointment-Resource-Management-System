@@ -45,14 +45,32 @@ jobs:
           cd caresync_mobile
           flutter pub get
 
-      - name: Accept Android Licenses
-        run: yes | flutter doctor --android-licenses || true
+      - name: Setup Android SDK Components & Accept Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          yes | flutter doctor --android-licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
 
       - name: Build Android APK
         run: |
           cd caresync_mobile
-          flutter build apk --release || flutter build apk --debug
+          flutter build apk --debug --verbose > ../build.log 2>&1 || {
+            echo "=== FLUTTER BUILD FAILED ==="
+            tail -n 150 ../build.log
+            tail -n 150 ../build.log > ../build_error_details.txt
+            exit 1
+          }
           ls -la build/app/outputs/flutter-apk/
+
+      - name: Save Diagnostic Error If Failed
+        if: failure()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add build_error_details.txt 2>/dev/null || true
+          git commit -m "debug: capture exact build error [skip ci]" || echo "No log to commit"
+          git pull --rebase origin main || true
+          git push origin main || true
 
       - name: Commit Real APK to Repository for Vercel Static CDN
         run: |
